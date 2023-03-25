@@ -21,7 +21,8 @@ const AllRoutes = () => {
     "/whitelist",
     "/karma",
     "/organization",
-    "/loan-Products",
+    "/loan-products",
+    "/loan-requests",
     "/savings-products",
     "/fees-charges",
     "/Products",
@@ -32,8 +33,8 @@ const AllRoutes = () => {
     "/reports",
     "/preferences",
     "/fees-pricing",
-    "audit-logs",
-    "systems-messages",
+    "/audit-logs",
+    "/systems-messages",
   ];
 
   return (
@@ -62,16 +63,18 @@ const AllRoutes = () => {
         />
       </Routes>
       {/* other unavailable routes */}
-      <Routes>
-        <Route
-          path={`/${location.pathname}`}
-          element={
-            <MainLayout>
-              {otherRoutes.includes(location.pathname) && <OtherPages />}
-            </MainLayout>
-          }
-        />
-      </Routes>
+      {otherRoutes.includes(location.pathname) && (
+        <Routes>
+          <Route
+            path={`/${location.pathname}`}
+            element={
+              <MainLayout>
+                {otherRoutes.includes(location.pathname) && <OtherPages />}
+              </MainLayout>
+            }
+          />
+        </Routes>
+      )}
     </div>
   );
 };
