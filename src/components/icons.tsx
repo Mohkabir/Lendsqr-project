@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 
-const LogoIcon: FC = () => (
+export const LogoIcon: FC = () => (
   <svg
     width="174"
     height="36"
@@ -54,8 +54,3 @@ const LogoIcon: FC = () => (
     </defs>
   </svg>
 );
-
-const icons = {
-  LogoIcon,
-};
-export default icons;
