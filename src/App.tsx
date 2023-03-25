@@ -1,11 +1,15 @@
-import React from "react";
+import React, { FC } from "react";
+import AllRoutes from "./routes";
+import { BrowserRouter } from "react-router-dom";
 
-function App() {
+const App: FC = () => {
   return (
     <div className="App">
-      <h1>Hello Lendsqr</h1>
+      <BrowserRouter>
+        <AllRoutes />
+      </BrowserRouter>
     </div>
   );
-}
+};
 
 export default App;
