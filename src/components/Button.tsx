@@ -3,7 +3,7 @@ import { FunctionBody } from "typescript";
 
 interface BtnProps {
   title: string;
-  action(): any;
+  action?(): any;
   primary?: boolean;
 }
 

@@ -86,9 +86,10 @@
       border-radius: 5px;
       opacity: 0.6;
     }
-    span {
+    button {
+      border: none;
+      background-color: inherit;
       font-family: AvenirNextLT;
-
       position: absolute;
       right: 15px;
       top: 20px;

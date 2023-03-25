@@ -122,6 +122,11 @@ span {
 .outline_btn {
   border-color: var(--primary);
 }
+
+.layout {
+  display: flex;
+  justify-content: space-between;
+}
 @media (max-width: 760px) {
   //   h1 {
   //     font-weight: 700;

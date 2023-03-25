@@ -1,4 +1,6 @@
 import React from "react";
+import Header from "../components/Header";
+import SideNav from "../components/SideNav";
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -6,8 +8,12 @@ type LayoutProps = {
 
 const MainLayout = (props: LayoutProps) => {
   return (
-    <div className="layout">
-      <div>{props.children}</div>
+    <div>
+      <Header />
+      <div className="layout">
+        <SideNav />
+        <div>{props.children}</div>
+      </div>
     </div>
   );
 };
