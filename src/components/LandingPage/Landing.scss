@@ -56,13 +56,10 @@
     form {
       height: 65%;
       height: 100%;
-
       width: 80%;
       display: flex;
       justify-content: center;
       align-items: center;
-      // align-items: flex-end;
-
       & > div {
         width: 84%;
       }
@@ -101,6 +98,35 @@
       letter-spacing: 0.1em;
       color: var(--secondary);
       cursor: pointer;
+    }
+  }
+
+  @media (max-width: 760px) {
+    height: 100%;
+    flex-direction: column;
+    header {
+      position: static;
+      width: 90%;
+      margin-top: 20px;
+      svg {
+        width: 30%;
+      }
+    }
+    .box1 {
+      display: none;
+    }
+    .box2 {
+      width: 90%;
+      height: 100%;
+      margin: auto;
+      margin-top: 60px;
+      form {
+        height: 100%;
+        width: 100%;
+        & > div {
+          width: 100%;
+        }
+      }
     }
   }
 }
