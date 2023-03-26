@@ -81,8 +81,8 @@ const UsersTable = () => {
   return (
     <div className="usertable">
       <TableHead />
-      {datas.map((data) => (
-        <UserRow user={data} />
+      {datas.map((data, idx) => (
+        <UserRow user={data} idx={idx} />
       ))}
     </div>
   );

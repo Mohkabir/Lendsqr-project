@@ -49,7 +49,9 @@ function LandingPage() {
                 required
                 ref={passwordRef}
               />
-              <button onClick={() => setIsShow(!isShow)}>SHOW</button>
+              <button onClick={() => setIsShow(!isShow)} type="button">
+                SHOW
+              </button>
             </div>
             <span className="forgotPassword">FORGOT PASSWORD?</span>
             <Btn title="LOG IN" primary />

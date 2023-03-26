@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { ActionIcon } from "../icons";
 
 interface User {
@@ -11,10 +12,12 @@ interface User {
 }
 
 const UserRow = (props: any) => {
-  console.log(props, "props");
+  const [current, setCurrent] = useState();
 
-  const { orgName, createdAt, userName, email, phoneNumber, status } =
-    props.user;
+  const {
+    idx,
+    user: { orgName, createdAt, userName, email, phoneNumber, status },
+  } = props;
 
   return (
     <div className="row">
@@ -31,7 +34,19 @@ const UserRow = (props: any) => {
         >
           {status}
         </span>
-        <ActionIcon />
+        <div className="actions">
+          <button type="button" onClick={() => setCurrent(idx)}>
+            <ActionIcon />
+          </button>
+
+          <div className={`options ${current && "open"}`}>
+            <button>
+              <Link to="/users/4">View Details</Link>
+            </button>
+            <button>Blacklist User</button>
+            <button>Activate User</button>
+          </div>
+        </div>
       </p>
     </div>
   );
