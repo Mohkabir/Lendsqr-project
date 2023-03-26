@@ -1,5 +1,5 @@
 import React, { createContext, useReducer, FC, useState } from "react";
-import { getUsersApi } from "../api";
+import { getUsersApi, getUserApi } from "../api";
 
 type ProfileType = {
   firstName: string;
@@ -49,8 +49,10 @@ export interface IUser {
 
 export type UserContextType = {
   users: IUser[];
+  userDetails: IUser | null;
   updateUser: (id: number) => void;
   getUsers: () => Promise<IUser[] | void>;
+  getUser: (id: number) => Promise<IUser | void>;
   loading: boolean;
 };
 
@@ -63,6 +65,8 @@ export const UserContext = createContext<UserContextType | null>(null);
 
 const UserProvider = ({ children }: Props) => {
   const [users, setUsers] = React.useState<IUser[]>([]);
+  const [userDetails, setUserDetails] = React.useState<IUser | null>(null);
+
   const [loading, setLoading] = React.useState<boolean>(false);
 
   const updateUser = (id: number) => {
@@ -83,9 +87,21 @@ const UserProvider = ({ children }: Props) => {
     }
     setLoading(false);
   };
+  const getUser = async (id: number) => {
+    setLoading(true);
+    try {
+      const res = await getUserApi(id);
+      setUserDetails(res.data);
+    } catch (error) {
+      console.log("something went wrong...");
+    }
+    setLoading(false);
+  };
 
   return (
-    <UserContext.Provider value={{ loading, users, getUsers, updateUser }}>
+    <UserContext.Provider
+      value={{ loading, users, getUsers, updateUser, getUser, userDetails }}
+    >
       {children}
     </UserContext.Provider>
   );

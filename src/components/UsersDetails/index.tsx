@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { IUser, UserContext, UserContextType } from "../../globalState";
 import { BackIcon } from "../icons";
 import OtherUserInfo from "./OtherUserInfo";
 import ProfileCard from "./ProfileCard";
@@ -12,7 +13,18 @@ interface TabSwitch {
 
 const UserDetails = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+
   const [tab, setTab] = useState<TabSwitch>();
+
+  const { loading, userDetails, getUser } = useContext(
+    UserContext
+  ) as UserContextType;
+
+  useEffect(() => {
+    getUser(Number(location.pathname.split("/")[2]));
+  }, []);
+
   return (
     <div className="userDetails">
       <div className="back">
@@ -27,8 +39,8 @@ const UserDetails = () => {
           <button type="button">Activate User</button>
         </div>
       </div>
-      <ProfileCard />
-      <OtherUserInfo />
+      <ProfileCard userDetails={userDetails} loading={loading} />
+      <OtherUserInfo userDetails={userDetails} loading={loading} />
     </div>
   );
 };

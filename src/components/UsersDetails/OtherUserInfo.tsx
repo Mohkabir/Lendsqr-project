@@ -1,6 +1,21 @@
 import React from "react";
+import { IUser } from "../../globalState";
+import loader from "../../assets/images/load-loading.gif";
 
-const OtherUserInfo = () => {
+type User = {
+  userDetails: IUser | null;
+  loading: boolean;
+};
+
+const OtherUserInfo = ({ userDetails, loading }: User) => {
+  if (loading) {
+    return (
+      <div className="loading">
+        <img src={loader} alt="" />
+      </div>
+    );
+  }
+
   return (
     <div className="otherUserInfo">
       <div>
@@ -8,68 +23,73 @@ const OtherUserInfo = () => {
         <div>
           <div>
             <h6>full Name</h6>
-            <span>Grace Effiom</span>
+            <span>{userDetails?.profile?.firstName}</span>
           </div>
           <div>
             <h6>Phone Number</h6>
-            <span>07060780922</span>
+            <span>{userDetails?.profile?.phoneNumber}</span>
           </div>
           <div>
             <h6>Email Address</h6>
-            <span>grace@gmail.com</span>
+            <span>{userDetails?.email}</span>
           </div>
           <div>
             <h6>Bvn</h6>
-            <span>07060780922</span>
+            <span>{userDetails?.profile?.bvn}</span>
           </div>
           <div>
             <h6>Gender</h6>
-            <span>Female</span>
+            <span>{userDetails?.profile?.gender}</span>
           </div>
           <div>
             <h6>Marital status</h6>
-            <span>Single</span>
+            <span>Not Specified</span>
           </div>
           <div>
             <h6>Children</h6>
-            <span>None</span>
+            <span>Not Specified</span>
           </div>
           <div>
             <h6>Type of residence</h6>
-            <span>Parent’s Apartment</span>
+            <span>Not Specified</span>
           </div>
         </div>
       </div>
+
       <div>
         <h5>Education and Employment</h5>
         <div>
           <div>
             <h6>level of education</h6>
-            <span>B.Sc</span>
+            <span>{userDetails?.education?.level}</span>
           </div>
           <div>
             <h6>employment status</h6>
-            <span>Employed</span>
+            <span>{userDetails?.education?.employmentStatus}</span>
           </div>
           <div>
             <h6>sector of employment</h6>
-            <span>FinTech</span>
+            <span>{userDetails?.education?.sector}</span>
           </div>
           <div>
             <h6>Duration of employment</h6>
-            <span>2 years</span>
+            <span>{userDetails?.education?.duration}</span>
           </div>
           <div>
             <h6>office email</h6>
-            <span>grace@lendsqr.com</span>
+            <span>{userDetails?.education?.officeEmail}</span>
           </div>
           <div>
             <h6>Monthly income</h6>
-            <span>₦200,000.00- ₦400,000.00</span>
+            <span>
+              {userDetails?.education?.monthlyIncome.map((income, idx) =>
+                idx === 0 ? `#${income} - ` : `#${income}`
+              )}
+            </span>
           </div>
           <div>
             <h6>loan repayment</h6>
-            <span>40,000</span>
+            <span>{userDetails?.education?.loanRepayment}</span>
           </div>
         </div>
       </div>
@@ -78,15 +98,15 @@ const OtherUserInfo = () => {
         <div>
           <div>
             <h6>Twitter</h6>
-            <span>@grace_effiom</span>
+            <span>{userDetails?.socials?.twitter}</span>
           </div>
           <div>
             <h6>Facebook</h6>
-            <span>Grace Effiom</span>
+            <span>{userDetails?.socials?.facebook}</span>
           </div>
           <div>
             <h6>Instagram</h6>
-            <span>@grace_effiom</span>
+            <span>{userDetails?.socials?.instagram}</span>
           </div>
         </div>
       </div>
@@ -95,19 +115,22 @@ const OtherUserInfo = () => {
         <div>
           <div>
             <h6>full Name</h6>
-            <span>Debby Ogana</span>
+            <span>
+              {userDetails?.guarantor?.firstName}{" "}
+              {userDetails?.guarantor?.lastName}
+            </span>
           </div>
           <div>
             <h6>Phone Number</h6>
-            <span>07060780922</span>
+            <span>{userDetails?.guarantor?.phoneNumber}</span>
           </div>
           <div>
             <h6>Email Address</h6>
-            <span>debby@gmail.com</span>
+            <span>- -</span>
           </div>
           <div>
             <h6>Relationship</h6>
-            <span>Sister</span>
+            <span>Not Specifield</span>
           </div>
         </div>
       </div>

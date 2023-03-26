@@ -1,17 +1,28 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { ActionIcon } from "../icons";
+import {
+  ActionIcon,
+  ActivateIcon,
+  ActiveUsers,
+  BlacklistIcon,
+  ViewIcon,
+} from "../icons";
 
 const UserRow = (props: any) => {
-  const [current, setCurrent] = useState();
+  const [current, setCurrent] = useState(null);
 
   const {
     idx,
     user: { orgName, createdAt, userName, email, phoneNumber, status, id },
   } = props;
+  console.log(current, "current");
 
   return (
     <div className="row">
+      {/* <p className="tool_tip">
+        <span className="text">{orgName}</span> <span className="tool_tiptext">{orgName}</span>
+      </p> */}
+
       <p>{orgName}</p>
       <p>{userName}</p>
       <p>{email}</p>
@@ -26,17 +37,33 @@ const UserRow = (props: any) => {
           {status}
         </span>
         <div className="actions">
-          <button type="button" onClick={() => setCurrent(idx)}>
+          <button
+            type="button"
+            onClick={() => {
+              setCurrent(current === null ? idx : null);
+            }}
+          >
             <ActionIcon />
           </button>
-
-          <div className={`options ${current && "open"}`}>
-            <button>
-              <Link to={`/users/${id}`}>View Details</Link>
-            </button>
-            <button>Blacklist User</button>
-            <button>Activate User</button>
-          </div>
+          {current === idx && (
+            <div className={`options open`}>
+              <button>
+                <Link to={`/users/${id}`}>
+                  <ViewIcon /> View Details
+                </Link>
+              </button>
+              <button>
+                <span>
+                  <BlacklistIcon /> Blacklist User
+                </span>
+              </button>
+              <button>
+                <span>
+                  <ActivateIcon /> Activate User
+                </span>
+              </button>
+            </div>
+          )}
         </div>
       </p>
     </div>

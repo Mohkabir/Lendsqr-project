@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import { IUser } from "../../globalState";
 import TableHead from "./TableHead";
 import UserRow from "./UserRow";
+import loader from "../../assets/images/load-loading.gif";
 
 type User = {
   users: IUser[];
@@ -14,7 +15,7 @@ const UsersTable = ({ users, loading }: User) => {
       <TableHead />
       {loading && (
         <div className="loading">
-          <p>loading....</p>
+          <img src={loader} alt="" />
         </div>
       )}
       {!loading && users.map((data, idx) => <UserRow user={data} idx={idx} />)}

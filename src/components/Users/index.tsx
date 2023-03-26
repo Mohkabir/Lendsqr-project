@@ -14,8 +14,6 @@ const UsersContents = () => {
     getUsers();
   }, []);
 
-  console.log(users, "users");
-
   const [postPerPage] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
   const indexOfLastPage = currentPage * postPerPage;

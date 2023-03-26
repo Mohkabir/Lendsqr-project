@@ -45,6 +45,8 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px 0;
+    gap: 15px;
+
     p {
       text-transform: uppercase;
       width: 15%;
@@ -77,12 +79,26 @@
     align-items: center;
     padding: 21px 0;
     border-bottom: 1px solid rgba(33, 63, 125, 0.1);
+    gap: 15px;
     p {
       width: 15%;
+      // word-break: keep-all;
+      // overflow-y: hidden;
+      word-break: break-all;
       word-wrap: break-word;
     }
     & > p:nth-child(1) {
       width: 16%;
+      // word-break: keep-all;
+      overflow-y: hidden;
+
+      .text {
+        width: 100%;
+        display: block;
+        // border: 1px solid red;
+        font-size: 14px;
+        word-break: keep-all !important;
+      }
     }
     & > p:nth-child(3) {
       width: 20%;
@@ -133,7 +149,7 @@
           border: none;
         }
         .options {
-          outline: 1px solid red;
+          // outline: 1px solid red;
           position: absolute;
           top: 20px;
           left: -120px;
@@ -143,12 +159,28 @@
           border-radius: 4px;
           width: 150px;
           z-index: 2;
-          display: none;
+          border-radius: 4px;
           button {
+            width: 100%;
             background-color: white;
             border: none;
             display: block;
-            padding: 10px;
+            a,
+            span {
+              display: block;
+              width: 100%;
+              text-decoration: none;
+              display: flex;
+              align-items: center;
+              padding: 10px;
+              cursor: pointer;
+            }
+            svg {
+              margin-right: 10px;
+            }
+            &:hover {
+              background-color: rgba(119, 119, 119, 0.1);
+            }
           }
         }
         .open {
@@ -179,9 +211,11 @@
       span {
         margin: 0 10px;
         color: rgba(84, 95, 125, 0.6);
+        cursor: pointer;
       }
       .active {
         color: rgba(84, 95, 125, 1);
+        border: 1px solid red;
       }
       button {
         border: none;

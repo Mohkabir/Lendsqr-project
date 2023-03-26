@@ -18,24 +18,14 @@ const Pagination = ({
 }: PaginateType) => {
   const [numbring, setNumbring] = useState<number[] | []>([]);
 
-  const getNum = () => {
+  useEffect(() => {
     const num = [];
     for (let i: number = 0; i < numberOfPages; i++) {
-      if (i < 2) {
-        num.push(i + 1);
-      }
-      if (i > numberOfPages / 2) {
-        num.push(i + 1);
-      }
+      num.push(i + 1);
     }
     setNumbring([...num]);
-  };
+  }, [numberOfPages]);
 
-  useEffect(() => {
-    getNum();
-  }, [currentPage]);
-
-  console.log(numbring, "numbring");
   return (
     <div className="pagination">
       <div className="total">
@@ -50,12 +40,7 @@ const Pagination = ({
         </button>
 
         {numbring.map((num, idx) => (
-          <span
-            className={`${num === idx + 1 && "active"} `}
-            onClick={() => setPage(num)}
-          >
-            {num === 3 ? <span>{num} ...</span> : num}
-          </span>
+          <span onClick={() => setPage(num)}>{num}</span>
         ))}
 
         <button type="button" onClick={next}>
