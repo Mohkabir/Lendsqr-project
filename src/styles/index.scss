@@ -127,6 +127,13 @@ span {
   display: flex;
   justify-content: space-between;
 }
+.contentsSection {
+  width: 80%;
+  background: #FAFAFA;
+   height: 100vh;
+  overflow-y: scroll;
+  padding-bottom: 100px;
+}
 @media (max-width: 760px) {
   //   h1 {
   //     font-weight: 700;

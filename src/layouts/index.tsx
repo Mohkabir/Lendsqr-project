@@ -12,7 +12,7 @@ const MainLayout = (props: LayoutProps) => {
       <Header />
       <div className="layout">
         <SideNav />
-        <div>{props.children}</div>
+        <div className="contentsSection">{props.children}</div>
       </div>
     </div>
   );

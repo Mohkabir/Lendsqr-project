@@ -1,0 +1,173 @@
+.users {
+  //   border: 2px solid red;
+  width: 90%;
+  margin: 0 auto;
+  h3 {
+    margin: 40px 0;
+    // font-weight: 600;
+  }
+  .cards {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    & > div {
+      background: #ffffff;
+      border: 1px solid rgba(33, 63, 125, 0.06);
+      box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
+      border-radius: 4px;
+      width: 23%;
+      padding: 29px;
+      h3 {
+        margin: 12px 0;
+        margin-bottom: 0;
+        font-weight: 600;
+      }
+      p {
+        // font-size: 14px;
+        line-height: 16px;
+        text-transform: uppercase;
+      }
+      svg {
+        margin-bottom: 14px;
+      }
+    }
+  }
+  .usertable {
+    background: #ffffff;
+    border: 1px solid rgba(33, 63, 125, 0.06);
+    box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
+    border-radius: 4px;
+    margin-top: 40px;
+    padding: 40px;
+    margin-bottom: 30px;
+  }
+  .tableHead {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    p {
+      text-transform: uppercase;
+      width: 15%;
+      display: flex;
+      align-items: center;
+      svg {
+        margin-left: 10px;
+        cursor: pointer;
+      }
+    }
+    & > p:nth-child(1) {
+      width: 16%;
+    }
+    & > p:nth-child(3) {
+      width: 20%;
+    }
+    & > p:nth-child(4) {
+      width: 16%;
+    }
+    & > p:nth-child(5) {
+      width: 19%;
+    }
+    & > p:nth-child(6) {
+      width: 13%;
+    }
+  }
+  .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 21px 0;
+    border-bottom: 1px solid rgba(33, 63, 125, 0.1);
+    p {
+      //   outline: 1px solid red;
+      width: 15%;
+      word-wrap: break-word;
+    }
+    & > p:nth-child(1) {
+      width: 16%;
+    }
+    & > p:nth-child(3) {
+      width: 20%;
+    }
+    & > p:nth-child(4) {
+      width: 16%;
+    }
+    & > p:nth-child(5) {
+      width: 19%;
+    }
+    & > p:nth-child(6) {
+      width: 13%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      span {
+        display: inline-block;
+        padding: 7px 14px;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 16px;
+        border-radius: 100px;
+      }
+      svg {
+        cursor: pointer;
+      }
+      .inactive {
+        background: rgba(84, 95, 125, 0.06);
+        text-align: center;
+        color: #545f7d;
+      }
+      .pending {
+        background: rgba(233, 178, 0, 0.1);
+        color: #e9b200;
+      }
+      .blacklist {
+        background: rgba(228, 3, 59, 0.1);
+        color: #e4033b;
+      }
+      .active {
+        background: rgba(57, 205, 98, 0.06);
+        color: #39cd62;
+      }
+    }
+  }
+
+  .pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .total {
+      .control {
+        border: none;
+        background: rgba(33, 63, 125, 0.1);
+        border-radius: 4px;
+        display: inline-block;
+        padding: 8px 20px;
+        margin: 0 10px;
+        cursor: pointer;
+        color: #213f7d;
+        font-weight: 600;
+      }
+    }
+    .numbring {
+      span {
+        margin: 0 10px;
+        color: rgba(84, 95, 125, 0.6);
+      }
+      .active {
+        color: rgba(84, 95, 125, 1);
+      }
+      button {
+        border: none;
+        background: rgba(33, 63, 125, 0.1);
+        border-radius: 4px;
+        display: inline-block;
+        padding: 8px;
+        cursor: pointer;
+        &:hover {
+          background: rgba(33, 63, 125, 0.2);
+        }
+      }
+    }
+  }
+}
