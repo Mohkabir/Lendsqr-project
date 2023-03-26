@@ -1,89 +1,23 @@
-import React from "react";
+import React, { FC } from "react";
+import { IUser } from "../../globalState";
 import TableHead from "./TableHead";
 import UserRow from "./UserRow";
 
-const UsersTable = () => {
-  const datas = [
-    {
-      createdAt: "Apr 30, 2020 10:00 AM",
-      orgName: "repudiandae",
-      userName: "Jaycee15",
-      email: "debby2@irorun.com",
-      phoneNumber: "08078903721",
-      status: "Pending",
-    },
-    {
-      createdAt: "Apr 30, 2020 10:00 AM",
-      orgName: "accusamus",
-      userName: "Jaycee15",
-      email: "debby2@irorun.com",
-      phoneNumber: "08078903721",
-      status: "Blacklisted",
-    },
-    {
-      createdAt: "Apr 30, 2020 10:00 AM",
-      orgName: "repudiandae",
-      userName: "Jaycee15",
-      email: "debby2@irorun.com",
-      phoneNumber: "08078903721",
-      status: "Pending",
-    },
-    {
-      createdAt: "Apr 30, 2020 10:00 AM",
-      orgName: "accusamus",
-      userName: "Jaycee15",
-      email: "debby2@irorun.com",
-      phoneNumber: "08078903721",
-      status: "Blacklisted",
-    },
-    {
-      createdAt: "Apr 30, 2020 10:00 AM",
-      orgName: "Lendsqr",
-      userName: "Jaycee15",
-      email: "debby2@irorun.com",
-      phoneNumber: "08078903721",
-      status: "Inactive",
-    },
-    {
-      createdAt: "Apr 30, 2020 10:00 AM",
-      orgName: "Lendsqr",
-      userName: "Jaycee15",
-      email: "debby2@irorun.com",
-      phoneNumber: "08078903721",
-      status: "Inactive",
-    },
-    {
-      createdAt: "Apr 30, 2020 10:00 AM",
-      orgName: "repudiandae",
-      userName: "Jaycee15",
-      email: "debby2@irorun.com",
-      phoneNumber: "08078903721",
-      status: "Pending",
-    },
-    {
-      createdAt: "Apr 30, 2020 10:00 AM",
-      orgName: "accusamus",
-      userName: "Jaycee15",
-      email: "debby2@irorun.com",
-      phoneNumber: "08078903721",
-      status: "Blacklisted",
-    },
-    {
-      createdAt: "Apr 30, 2020 10:00 AM",
-      orgName: "Lendsqr",
-      userName: "Jaycee15",
-      email: "debby2@irorun.com",
-      phoneNumber: "08078903721",
-      status: "Inactive",
-    },
-  ];
+type User = {
+  users: IUser[];
+  loading: boolean;
+};
 
+const UsersTable = ({ users, loading }: User) => {
   return (
     <div className="usertable">
       <TableHead />
-      {datas.map((data, idx) => (
-        <UserRow user={data} idx={idx} />
-      ))}
+      {loading && (
+        <div className="loading">
+          <p>loading....</p>
+        </div>
+      )}
+      {!loading && users.map((data, idx) => <UserRow user={data} idx={idx} />)}
     </div>
   );
 };

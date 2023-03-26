@@ -1,9 +1,12 @@
-import React from 'react'
+import axios from "axios";
+import config from "../configs";
 
-const index = () => {
-  return (
-    <div>index</div>
-  )
-}
+const { BASE_URL } = config;
 
-export default index
+export const getUsersApi = () => {
+  return axios.get(`${BASE_URL}/lendsqr/api/v1/users`);
+};
+
+// export const getUserApi = ({ id }: number) => {
+//   return axios.get(`${BASE_URL}/lendsqr/api/v1/users/${id}`);
+// };

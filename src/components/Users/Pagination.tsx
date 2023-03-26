@@ -1,27 +1,64 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NextIcon, PrevIcon } from "../icons";
 
-const Pagination = () => {
+type PaginateType = {
+  currentPage: number;
+  numberOfPages: number;
+  next: () => void;
+  previous: () => void;
+  setPage: (num: number) => void;
+};
+
+const Pagination = ({
+  currentPage,
+  numberOfPages,
+  next,
+  previous,
+  setPage,
+}: PaginateType) => {
+  const [numbring, setNumbring] = useState<number[] | []>([]);
+
+  const getNum = () => {
+    const num = [];
+    for (let i: number = 0; i < numberOfPages; i++) {
+      if (i < 2) {
+        num.push(i + 1);
+      }
+      if (i > numberOfPages / 2) {
+        num.push(i + 1);
+      }
+    }
+    setNumbring([...num]);
+  };
+
+  useEffect(() => {
+    getNum();
+  }, [currentPage]);
+
+  console.log(numbring, "numbring");
   return (
     <div className="pagination">
       <div className="total">
         <span>Showing</span>
-        <span className="control">100</span>
-        <span>out of 100</span>
+        <span className="control">{currentPage}</span>
+        <span>out of {numberOfPages}</span>
       </div>
 
       <div className="numbring">
-        <button type="button">
+        <button type="button" onClick={previous}>
           <PrevIcon />
         </button>
-        <span className="active">1</span>
-        <span>2</span>
-        <span>3</span>
-        <span>...</span>
-        <span>15</span>
-        <span>16</span>
 
-        <button type="button">
+        {numbring.map((num, idx) => (
+          <span
+            className={`${num === idx + 1 && "active"} `}
+            onClick={() => setPage(num)}
+          >
+            {num === 3 ? <span>{num} ...</span> : num}
+          </span>
+        ))}
+
+        <button type="button" onClick={next}>
           <NextIcon />
         </button>
       </div>

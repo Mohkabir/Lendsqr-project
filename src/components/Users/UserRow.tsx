@@ -2,21 +2,12 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { ActionIcon } from "../icons";
 
-interface User {
-  createdAt?: string;
-  orgName?: string;
-  userName?: string;
-  email?: string;
-  phoneNumber?: string;
-  status?: string;
-}
-
 const UserRow = (props: any) => {
   const [current, setCurrent] = useState();
 
   const {
     idx,
-    user: { orgName, createdAt, userName, email, phoneNumber, status },
+    user: { orgName, createdAt, userName, email, phoneNumber, status, id },
   } = props;
 
   return (
@@ -41,7 +32,7 @@ const UserRow = (props: any) => {
 
           <div className={`options ${current && "open"}`}>
             <button>
-              <Link to="/users/4">View Details</Link>
+              <Link to={`/users/${id}`}>View Details</Link>
             </button>
             <button>Blacklist User</button>
             <button>Activate User</button>

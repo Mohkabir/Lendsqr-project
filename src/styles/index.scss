@@ -155,7 +155,6 @@ span {
   padding: 20px;
   padding-bottom: 0;
   display: none;
-
 }
 .openSideNavBtn {
   cursor: pointer;
@@ -168,6 +167,12 @@ span {
   svg {
     width: 40px;
   }
+}
+.loading {
+  height: 20vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 @media (max-width: 1150px) {
   .sideNavWrap {
