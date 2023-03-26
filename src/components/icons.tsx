@@ -984,9 +984,20 @@ export const RatingFill: FC = () => (
     />
   </svg>
 );
-// export const BackIcon: FC = () => (
-
-// );
+export const OpenSideNav: FC = () => (
+  <svg
+    width="56"
+    height="48"
+    viewBox="0 0 56 48"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M52 0H4C1.8 0 0 1.8 0 4V44C0 46.2 1.8 48 4 48H52C54.2 48 56 46.2 56 44V4C56 1.8 54.2 0 52 0ZM52 44H20V26H40.4L33.2 33.2L36 36L48 24L36 12L33.2 14.8L40.4 22H20V4H52V44Z"
+      fill="#39CDCC"
+    />
+  </svg>
+);
 // export const BackIcon: FC = () => (
 
 // );

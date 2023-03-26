@@ -78,7 +78,6 @@
     padding: 21px 0;
     border-bottom: 1px solid rgba(33, 63, 125, 0.1);
     p {
-      //   outline: 1px solid red;
       width: 15%;
       word-wrap: break-word;
     }
@@ -193,6 +192,72 @@
         cursor: pointer;
         &:hover {
           background: rgba(33, 63, 125, 0.2);
+        }
+      }
+    }
+  }
+
+  @media (max-width: 1150px) {
+    width: 95%;
+  }
+
+  @media (max-width: 1000px) {
+    h3 {
+      margin: 20px 0;
+      font-size: 16px;
+    }
+    .cards {
+      & > div {
+        padding: 20px;
+        h3 {
+          margin: 0px 0;
+          font-size: 16px;
+        }
+        p {
+          font-size: 12px;
+          line-height: 14px;
+        }
+        svg {
+          margin-bottom: 12px;
+        }
+      }
+    }
+    .usertable {
+      margin-top: 20px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .tableHead {
+      p {
+        font-size: 11px;
+        svg {
+          margin-left: 10px;
+          cursor: pointer;
+        }
+      }
+    }
+    .row {
+      padding: 14px 0;
+      p {
+        font-size: 12px;
+      }
+      & > p:nth-child(6) {
+        span {
+          padding: 5px 10px;
+          font-size: 12px;
+          line-height: 14px;
+        }
+        .actions {
+          .options {
+            width: 130px;
+            button {
+              padding: 8px;
+              font-size: 12px;
+              a {
+                font-size: 12px;
+              }
+            }
+          }
         }
       }
     }

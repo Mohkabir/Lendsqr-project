@@ -67,4 +67,45 @@
       line-height: 19px;
     }
   }
+
+  @media (max-width: 1150px) {
+    padding: 15px 20px;
+    .logo {
+      width: 14%;
+      svg {
+        width: 80%;
+      }
+    }
+    .search {
+      width: 30%;
+      .inputGroup {
+        input {
+          width: 100%;
+          padding: 8px 20px;
+        }
+        button {
+          font-size: 10px;
+          cursor: pointer;
+          padding: 9px 20px;
+        }
+      }
+    }
+    .profile {
+      width: 35%;
+      .profile_img {
+        width: 38px;
+        height: 38px;
+        margin-left: 20px;
+      }
+      span {
+        font-size: 14px;
+      }
+      svg {
+        margin-left: 20px;
+      }
+      p {
+        font-size: 14px;
+      }
+    }
+  }
 }

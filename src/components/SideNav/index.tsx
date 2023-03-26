@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import { NavLink } from "react-router-dom";
 import {
   AuditIcon,
@@ -25,10 +25,16 @@ import {
 } from "../icons";
 import "./SideNav.scss";
 
-const SideNav = () => {
+interface CloseInterface {
+  closeSideNav(): void;
+}
+const SideNav: FC<CloseInterface> = ({ closeSideNav }) => {
   return (
     <div className="sideNav">
       <ul>
+        <p className="cancelSideNav" onClick={closeSideNav}>
+          x
+        </p>
         <h5 className="switch">
           <SwitchOrganizationIcon /> Switch Organization
         </h5>
