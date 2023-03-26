@@ -129,10 +129,17 @@ span {
 }
 .contentsSection {
   width: 80%;
-  background: #FAFAFA;
-   height: 100vh;
+  background: #fafafa;
+  height: 100vh;
   overflow-y: scroll;
   padding-bottom: 100px;
+}
+.no-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  text-transform: capitalize;
 }
 @media (max-width: 760px) {
   //   h1 {
