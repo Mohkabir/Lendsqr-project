@@ -44,13 +44,6 @@ const UsersContents = () => {
     }
   };
 
-  //  usernameRef: string | undefined;
-  //  email: string | undefined;
-  //  phone: number | undefined;
-  //  date: string | undefined;
-  //  org: string | undefined;
-  // status: string | undefined;
-
   const filterSearch = (val: any) => {
     console.log(val, "vallllll");
     let filtered: any[] = [];

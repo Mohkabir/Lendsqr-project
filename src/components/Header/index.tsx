@@ -1,20 +1,29 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IUser, UserContext, UserContextType } from "../../globalState";
 import {
   CaretDown,
   LogoIcon,
   MenuIcon,
   NotificationIcon,
+  ProfileAvatar,
   SearchIcon,
 } from "../icons";
 import "./Header.scss";
 
+type CurrentUserType = {
+  email: string;
+  avatar: string;
+};
 const Header = () => {
   const [isMenu, setIsMenu] = useState<boolean>(false);
   const [searchResults, setSearchResults] = useState<IUser[]>([]);
-  const { loading, users } = useContext(UserContext) as UserContextType;
+  const { users, LogOut } = useContext(UserContext) as UserContextType;
   const [search, setSearch] = useState("");
+  const [openDropDown, setOpenDropDown] = useState<boolean>(false);
+
+  const [user, setUser] = useState<CurrentUserType>();
+  const navigate = useNavigate();
 
   const filterSearch = (val: string) => {
     const res = users.filter((user) => {
@@ -34,6 +43,25 @@ const Header = () => {
     }
   };
 
+  const getCurrentUser = () => {
+    let user: string | null = localStorage.getItem("user");
+    if (user) {
+      setUser(JSON.parse(user));
+    } else {
+      navigate("/");
+    }
+  };
+
+  useEffect(() => {
+    getCurrentUser();
+  }, []);
+
+  const handleLogout = () => {
+    let res = LogOut();
+    if (res === "done") {
+      navigate("/");
+    }
+  };
   return (
     <div className="header">
       <div className="logo">
@@ -78,9 +106,19 @@ const Header = () => {
         <span>Docs</span>
         <NotificationIcon />
 
-        <div className="profile_img"></div>
+        <div className="profile_img">
+          {user?.avatar ? <img src={user?.avatar} alt="" /> : <ProfileAvatar />}
+        </div>
         <p>
-          Adedeji <CaretDown />
+          <span>{user?.email?.split("@")[0]}</span>
+          <button onClick={() => setOpenDropDown(!openDropDown)}>
+            <CaretDown />
+          </button>
+          {openDropDown && (
+            <div className="dropdown">
+              <p onClick={handleLogout}> Log Out</p>
+            </div>
+          )}
         </p>
       </div>
       <div className="menuBar">
@@ -96,9 +134,11 @@ const Header = () => {
               x
             </button>
           </p>
-          <li>Adedeji</li>
+          <li>{user?.email?.split("@")[0]}</li>
           <li>
-            <button type="button">Log Out</button>
+            <button type="button" onClick={handleLogout}>
+              Log Out
+            </button>
           </li>
         </div>
       )}

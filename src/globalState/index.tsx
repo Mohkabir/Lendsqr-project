@@ -61,6 +61,7 @@ export type UserContextType = {
   getUser: (id: number) => Promise<IUser | void>;
   usersOverview: UsersOverviewType;
   loading: boolean;
+  LogOut: () => string;
 };
 
 type Props = {
@@ -151,6 +152,11 @@ const UserProvider = ({ children }: Props) => {
     console.log(id, userDetails, status, "userrr");
     setUsers(userDetails);
   };
+
+  const LogOut = () => {
+    localStorage.removeItem("user");
+    return "done";
+  };
   return (
     <UserContext.Provider
       value={{
@@ -161,6 +167,7 @@ const UserProvider = ({ children }: Props) => {
         getUser,
         userDetails,
         usersOverview,
+        LogOut,
       }}
     >
       {children}
