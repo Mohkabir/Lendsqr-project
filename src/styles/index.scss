@@ -120,7 +120,11 @@ span {
 }
 
 .outline_btn {
-  border-color: var(--primary);
+  border-color: #545f7d;
+  background-color: white;
+  &:hover {
+    background-color: rgba(119, 119, 119, 0.1);
+  }
 }
 
 .layout {
@@ -227,6 +231,7 @@ span {
   .openSideNavBtn {
     top: 70px;
     left: -10px;
+    z-index: 2;
 
     svg {
       width: 30px;
@@ -234,8 +239,8 @@ span {
   }
   .sideNavWrap {
     width: 80%;
-
     height: 100vh;
+    z-index: 2;
   }
   .no-content {
     height: 50%;

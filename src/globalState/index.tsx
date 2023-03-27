@@ -31,6 +31,7 @@ export interface IUser {
   guarantor: GuarantorType;
   accountBalance: string;
   accountNumber: string;
+  status: string;
   socials: {
     facebook: string;
     instagram: string;
@@ -46,13 +47,19 @@ export interface IUser {
     loanRepayment: string;
   };
 }
-
+export type UsersOverviewType = {
+  allUsers: number;
+  activeUsers: number;
+  userWithLoans: number;
+  usersWithSavings: number;
+};
 export type UserContextType = {
   users: IUser[];
   userDetails: IUser | null;
-  updateUser: (id: number) => void;
+  updateUser: (id: string, currentUsers: IUser[], status: string) => void;
   getUsers: () => Promise<IUser[] | void>;
   getUser: (id: number) => Promise<IUser | void>;
+  usersOverview: UsersOverviewType;
   loading: boolean;
 };
 
@@ -67,21 +74,57 @@ const UserProvider = ({ children }: Props) => {
   const [users, setUsers] = React.useState<IUser[]>([]);
   const [userDetails, setUserDetails] = React.useState<IUser | null>(null);
 
+  const [usersOverview, setUsersOverview] = React.useState<UsersOverviewType>({
+    allUsers: 0,
+    activeUsers: 0,
+    userWithLoans: 0,
+    usersWithSavings: 0,
+  });
   const [loading, setLoading] = React.useState<boolean>(false);
 
-  const updateUser = (id: number) => {
-    // users.filter((todo: IUser) => {
-    //   if (todo.id === id) {
-    //     todo.status = true;
-    //     setUsers([...users]);
-    //   }
-    // });
+  const compareDates = (d1: string, d2: string) => {
+    let date1 = new Date(d1).getTime();
+    let date2 = new Date(d2).getTime();
+    if (date1 > date2) {
+      return false;
+    } else {
+      return true;
+    }
   };
+
   const getUsers = async () => {
     setLoading(true);
+
     try {
       const res = await getUsersApi();
-      setUsers(res.data);
+      let withLoans = 0;
+      let withSavings = 0;
+      let activeUsers = 0;
+      let generated = res.data.map((user: IUser) => {
+        if (
+          Number(user?.accountBalance) -
+            Number(user?.education?.loanRepayment) >
+          1
+        ) {
+          withLoans += 1;
+        } else {
+          withSavings += 1;
+        }
+        if (compareDates(user.createdAt, user.lastActiveDate)) {
+          activeUsers += 1;
+          return { ...user, status: "inactive" };
+        } else {
+          return { ...user, status: "pending" };
+        }
+      });
+      setUsers(generated);
+      setUsersOverview({
+        ...usersOverview,
+        allUsers: res.data.length,
+        userWithLoans: withLoans,
+        usersWithSavings: withSavings,
+        activeUsers: activeUsers,
+      });
     } catch (error) {
       console.log("something went wrong...");
     }
@@ -98,9 +141,27 @@ const UserProvider = ({ children }: Props) => {
     setLoading(false);
   };
 
+  const updateUser = (id: string, currentUsers: IUser[], status: string) => {
+    const userDetails = currentUsers.map((user) => {
+      if (user.id === id) {
+        return { ...user, status };
+      }
+      return user;
+    });
+    console.log(id, userDetails, status, "userrr");
+    setUsers(userDetails);
+  };
   return (
     <UserContext.Provider
-      value={{ loading, users, getUsers, updateUser, getUser, userDetails }}
+      value={{
+        loading,
+        users,
+        getUsers,
+        updateUser,
+        getUser,
+        userDetails,
+        usersOverview,
+      }}
     >
       {children}
     </UserContext.Provider>

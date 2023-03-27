@@ -1,22 +1,38 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import dayjs from "dayjs";
+
 import {
   ActionIcon,
   ActivateIcon,
-  ActiveUsers,
   BlacklistIcon,
   FilterIcon,
   ViewIcon,
 } from "../icons";
+import { IUser, UserContext, UserContextType } from "../../globalState";
 
-const UserRow = (props: any) => {
-  const [current, setCurrent] = useState(null);
+type RowProps = {
+  openFilter: () => void;
+  idx: number;
+  user: IUser;
+};
 
-  const {
-    idx,
-    user: { orgName, createdAt, userName, email, phoneNumber, status, id },
-  } = props;
+const UserRow = ({ user, idx, openFilter }: RowProps) => {
+  const { users, updateUser } = useContext(UserContext) as UserContextType;
 
+  const [current, setCurrent] = useState<number | null>(null);
+
+  const { orgName, createdAt, userName, email, phoneNumber, status, id } = user;
+
+  const formatNumber = (val: string): any => {
+    val = val.split("x")[0];
+    return val.replace(/[-\s.()]/g, "");
+  };
+
+  const handlAction = (val: string, userId: string) => {
+    updateUser(userId, users, val);
+    setCurrent(null);
+  };
   return (
     <>
       <div className="row">
@@ -27,13 +43,15 @@ const UserRow = (props: any) => {
         <p>{orgName}</p>
         <p>{userName}</p>
         <p>{email}</p>
-        <p>{phoneNumber}</p>
-        <p>{createdAt}</p>
+        <p>{formatNumber(phoneNumber)}</p>
+        <p> {dayjs(createdAt).format("MMM D, YYYY h:mm A")}</p>
         <p>
           <span
-            className={`${status === "Pending" && "pending"} ${
-              status === "Blacklisted" && "blacklist"
-            } ${status === "Inactive" && "inactive"}`}
+            className={`${status === "pending" && "pending"} ${
+              status === "blacklisted" && "blacklist"
+            } ${status === "inactive" && "inactive"} ${
+              status === "active" && "active"
+            }`}
           >
             {status}
           </span>
@@ -53,12 +71,12 @@ const UserRow = (props: any) => {
                     <ViewIcon /> View Details
                   </Link>
                 </button>
-                <button>
+                <button onClick={() => handlAction("blacklisted", id)}>
                   <span>
                     <BlacklistIcon /> Blacklist User
                   </span>
                 </button>
-                <button>
+                <button onClick={() => handlAction("active", id)}>
                   <span>
                     <ActivateIcon /> Activate User
                   </span>
@@ -71,7 +89,9 @@ const UserRow = (props: any) => {
 
       <div className="mobileRow">
         <div className="head">
-          <FilterIcon />
+          <button type="button" onClick={openFilter}>
+            <FilterIcon />
+          </button>
           <div className="actions">
             <button
               type="button"
@@ -88,12 +108,12 @@ const UserRow = (props: any) => {
                     <ViewIcon /> View Details
                   </Link>
                 </button>
-                <button>
+                <button onClick={() => handlAction("blacklisted", id)}>
                   <span>
                     <BlacklistIcon /> Blacklist User
                   </span>
                 </button>
-                <button>
+                <button onClick={() => handlAction("active", id)}>
                   <span>
                     <ActivateIcon /> Activate User
                   </span>
@@ -115,14 +135,24 @@ const UserRow = (props: any) => {
         </div>
         <div>
           <p>phone Number</p>
-          <p>{phoneNumber}</p>
+          <p>{formatNumber(phoneNumber)}</p>
         </div>
         <div>
-          <p>created At</p>
-          <p>{createdAt}</p>
+          <p>Date joined</p>
+          <p>{dayjs(createdAt).format("MMM D, YYYY h:mm A")}</p>
         </div>
         <div>
           <p>status</p>
+          <p
+            style={{ textAlign: "center" }}
+            className={`${status === "pending" && "pending"} ${
+              status === "blacklisted" && "blacklist"
+            } ${status === "inactive" && "inactive"} ${
+              status === "active" && "active"
+            }`}
+          >
+            {status}
+          </p>
         </div>
       </div>
     </>

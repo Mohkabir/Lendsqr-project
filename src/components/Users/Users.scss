@@ -39,6 +39,7 @@
     margin-top: 40px;
     padding: 25px;
     margin-bottom: 30px;
+    position: relative;
   }
   .tableHead {
     display: flex;
@@ -52,9 +53,12 @@
       width: 15%;
       display: flex;
       align-items: center;
-      svg {
-        margin-left: 10px;
+
+      button {
+        background-color: inherit;
+        border: none;
         cursor: pointer;
+        margin-left: 10px;
       }
     }
     & > p:nth-child(1) {
@@ -124,27 +128,13 @@
         cursor: pointer;
       }
 
-      .inactive {
-        background: rgba(84, 95, 125, 0.06);
-        text-align: center;
-        color: #545f7d;
-      }
-      .pending {
-        background: rgba(233, 178, 0, 0.1);
-        color: #e9b200;
-      }
-      .blacklist {
-        background: rgba(228, 3, 59, 0.1);
-        color: #e4033b;
-      }
-      .active {
-        background: rgba(57, 205, 98, 0.06);
-        color: #39cd62;
-      }
       .actions {
         position: relative;
         & > button {
           border: none;
+          padding: 5px 10px;
+          background-color: inherit;
+          cursor: pointer;
         }
         .options {
           position: absolute;
@@ -186,7 +176,23 @@
       }
     }
   }
-
+  .inactive {
+    background: rgba(84, 95, 125, 0.06);
+    text-align: center;
+    color: #545f7d;
+  }
+  .pending {
+    background: rgba(233, 178, 0, 0.1);
+    color: #e9b200;
+  }
+  .blacklist {
+    background: rgba(228, 3, 59, 0.1);
+    color: #e4033b;
+  }
+  .active {
+    background: rgba(57, 205, 98, 0.06);
+    color: #39cd62;
+  }
   .pagination {
     display: flex;
     justify-content: space-between;
@@ -229,6 +235,82 @@
   }
   .mobileRow {
     display: none;
+  }
+  .filter {
+    position: absolute;
+    top: 70px;
+    left: 20px;
+    width: 28%;
+    background: #ffffff;
+    border: 1px solid rgba(84, 95, 125, 0.14);
+    box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
+    border-radius: 4px;
+    padding: 20px 0;
+    .close {
+      text-align: right;
+      width: 85%;
+      margin: 0 auto;
+
+      button {
+        cursor: pointer;
+        padding: 5px 10px;
+        border-radius: 50px;
+        background-color: white;
+        border: 1px solid rgba(84, 95, 125, 0.14);
+      }
+    }
+    h6 {
+      font-size: 14px;
+      line-height: 16px;
+      color: #545f7d;
+      font-weight: 400;
+      margin-bottom: 6px;
+    }
+    .group {
+      width: 85%;
+      margin: 0 auto;
+      margin-top: 20px;
+      input,
+      select {
+        width: 100%;
+        padding: 12px 20px;
+        background: #ffffff;
+        border: 1px solid rgba(33, 63, 125, 0.2);
+        border-radius: 8px;
+        &::placeholder {
+          opacity: 0.2;
+        }
+      }
+      .date {
+        position: relative;
+        span {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          padding: 12px 20px;
+          border-radius: 8px;
+          background-color: white;
+          border: 1px solid rgba(33, 63, 125, 0.2);
+          color: rgba(33, 63, 125, 0.2);
+          cursor: pointer;
+          display: flex;
+          justify-content: space-between;
+        }
+      }
+    }
+    .btnGroup {
+      display: flex;
+      justify-content: space-between;
+      width: 85%;
+      margin: 0 auto;
+      margin-top: 30px;
+
+      button {
+        width: 47%;
+      }
+    }
   }
   @media (max-width: 1150px) {
     width: 95%;
@@ -334,7 +416,6 @@
       margin-bottom: 20px;
       padding-bottom: 10px;
       padding: 10px;
-
       background: #ffffff;
       border: 1px solid rgba(84, 95, 125, 0.04);
       box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
@@ -343,6 +424,10 @@
         padding: 10px;
         display: flex;
         justify-content: space-between;
+        & > button {
+          background-color: inherit;
+          border: none;
+        }
       }
       & > div {
         display: flex;
@@ -350,8 +435,6 @@
         border-bottom: 1px solid rgba(33, 63, 125, 0.05);
 
         p {
-          word-break: break-all;
-          word-wrap: break-word;
           padding: 5px 0;
         }
         & > p:nth-child(1) {
@@ -360,7 +443,8 @@
           font-size: 12px;
         }
         & > p:nth-child(2) {
-          width: 62%;
+          width: 65%;
+          word-break: break-all;
         }
       }
       .actions {
@@ -437,7 +521,6 @@
         }
         .active {
           color: rgba(84, 95, 125, 1);
-          border: 1px solid red;
         }
         button {
           border: none;
@@ -450,6 +533,17 @@
           align-self: flex-end;
         }
       }
+    }
+    .filter {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      height: 100vh;
+      overflow-y: scroll;
+      padding-bottom: 120px;
+      z-index: 2;
     }
   }
 }

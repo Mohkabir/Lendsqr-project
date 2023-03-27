@@ -125,6 +125,10 @@
     padding: 30px;
     margin-top: 30px;
     margin-bottom: 50px;
+    .nodata {
+      text-align: center;
+      height: 500px;
+    }
     & > div {
       // outline: 1px solid red;
       padding: 35px 0;

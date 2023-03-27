@@ -26,6 +26,9 @@
         margin-right: 10px;
         opacity: 0.5;
       }
+      &:hover {
+        background: rgba(57, 205, 204, 0.06);
+      }
     }
     h6 {
       font-family: WorkSans;

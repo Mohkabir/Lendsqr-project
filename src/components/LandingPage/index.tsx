@@ -16,8 +16,8 @@ function LandingPage() {
   const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const payload = {
-      emailRef,
-      passwordRef,
+      emailRef: emailRef?.current?.value,
+      passwordRef: passwordRef?.current?.value,
     };
     // localStorage.setItem("user", JSON.stringify(payload));
     navigate("/users");
