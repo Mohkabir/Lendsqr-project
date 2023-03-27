@@ -46,13 +46,19 @@ export interface IUser {
     loanRepayment: string;
   };
 }
-
+export type UsersOverviewType = {
+  allUsers: number;
+  activeUsers: number;
+  userWithLoans: number;
+  usersWithSavings: number;
+};
 export type UserContextType = {
   users: IUser[];
   userDetails: IUser | null;
   updateUser: (id: number) => void;
   getUsers: () => Promise<IUser[] | void>;
   getUser: (id: number) => Promise<IUser | void>;
+  usersOverview: UsersOverviewType;
   loading: boolean;
 };
 
@@ -67,6 +73,13 @@ const UserProvider = ({ children }: Props) => {
   const [users, setUsers] = React.useState<IUser[]>([]);
   const [userDetails, setUserDetails] = React.useState<IUser | null>(null);
 
+  const [usersOverview, setUsersOverview] = React.useState<UsersOverviewType>({
+    allUsers: 0,
+    activeUsers: 30,
+    userWithLoans: 0,
+    usersWithSavings: 34,
+  });
+
   const [loading, setLoading] = React.useState<boolean>(false);
 
   const updateUser = (id: number) => {
@@ -77,11 +90,50 @@ const UserProvider = ({ children }: Props) => {
     //   }
     // });
   };
+
+  const compareDates = (d1: string, d2: string) => {
+    let date1 = new Date(d1).getTime();
+    let date2 = new Date(d2).getTime();
+    console.log(d1, "=", date1, "--", d2, "=", date2, "\n", date1 > date2);
+    if (date1 > date2) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+
   const getUsers = async () => {
     setLoading(true);
+
     try {
       const res = await getUsersApi();
       setUsers(res.data);
+
+      let withLoans = 0;
+      let withSavings = 0;
+      let activeUsers = 0;
+
+      res.data.forEach((user: IUser) => {
+        if (
+          Number(user?.accountBalance) -
+            Number(user?.education?.loanRepayment) >
+          1
+        ) {
+          withLoans += 1;
+        } else {
+          withSavings += 1;
+        }
+        if (compareDates(user.createdAt, user.lastActiveDate)) {
+          activeUsers += 1;
+        }
+      });
+      setUsersOverview({
+        ...usersOverview,
+        allUsers: res.data.length,
+        userWithLoans: withLoans,
+        usersWithSavings: withSavings,
+        activeUsers: activeUsers,
+      });
     } catch (error) {
       console.log("something went wrong...");
     }
@@ -100,7 +152,15 @@ const UserProvider = ({ children }: Props) => {
 
   return (
     <UserContext.Provider
-      value={{ loading, users, getUsers, updateUser, getUser, userDetails }}
+      value={{
+        loading,
+        users,
+        getUsers,
+        updateUser,
+        getUser,
+        userDetails,
+        usersOverview,
+      }}
     >
       {children}
     </UserContext.Provider>
