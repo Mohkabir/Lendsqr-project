@@ -11,7 +11,9 @@ const UsersContents = () => {
   ) as UserContextType;
 
   useEffect(() => {
-    getUsers();
+    if (!users.length) {
+      getUsers();
+    }
   }, []);
 
   const [postPerPage] = useState(10);

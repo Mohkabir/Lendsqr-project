@@ -82,8 +82,6 @@
     gap: 15px;
     p {
       width: 15%;
-      // word-break: keep-all;
-      // overflow-y: hidden;
       word-break: break-all;
       word-wrap: break-word;
     }
@@ -149,7 +147,6 @@
           border: none;
         }
         .options {
-          // outline: 1px solid red;
           position: absolute;
           top: 20px;
           left: -120px;
@@ -230,7 +227,9 @@
       }
     }
   }
-
+  .mobileRow {
+    display: none;
+  }
   @media (max-width: 1150px) {
     width: 95%;
   }
@@ -292,6 +291,163 @@
               }
             }
           }
+        }
+      }
+    }
+  }
+  @media (max-width: 760px) {
+    & > h3 {
+      margin: 10px 0;
+
+      text-align: center;
+      font-size: 18px;
+    }
+    .cards {
+      flex-wrap: wrap;
+      margin: 0 auto;
+      width: 95%;
+      & > div {
+        width: 47%;
+        margin-bottom: 10px;
+        padding: 5px 5px;
+        svg {
+          margin-bottom: 4px;
+          width: 30px;
+        }
+      }
+    }
+    .usertable {
+      width: 95%;
+      margin: 0 auto;
+      padding: 0px;
+      border: none;
+      box-shadow: none;
+    }
+    .tableHead {
+      display: none;
+    }
+    .row {
+      display: none;
+    }
+    .mobileRow {
+      display: block;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      padding: 10px;
+
+      background: #ffffff;
+      border: 1px solid rgba(84, 95, 125, 0.04);
+      box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
+      border-radius: 4px;
+      .head {
+        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+      }
+      & > div {
+        display: flex;
+        column-gap: 20px;
+        border-bottom: 1px solid rgba(33, 63, 125, 0.05);
+
+        p {
+          word-break: break-all;
+          word-wrap: break-word;
+          padding: 5px 0;
+        }
+        & > p:nth-child(1) {
+          width: 35%;
+          text-transform: uppercase;
+          font-size: 12px;
+        }
+        & > p:nth-child(2) {
+          width: 62%;
+        }
+      }
+      .actions {
+        position: relative;
+        & > button {
+          border: none;
+        }
+        .options {
+          position: absolute;
+          top: 20px;
+          left: -140px;
+          background: #ffffff;
+          border: 1px solid rgba(84, 95, 125, 0.04);
+          box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
+          border-radius: 4px;
+          width: 150px;
+          z-index: 2;
+          border-radius: 4px;
+          button {
+            padding: 3px;
+            font-size: 12px;
+            width: 100%;
+            background-color: white;
+            border: none;
+            display: block;
+            a,
+            span {
+              display: block;
+              width: 100%;
+              text-decoration: none;
+              display: flex;
+              align-items: center;
+              padding: 10px;
+              cursor: pointer;
+              font-size: 12px;
+            }
+            svg {
+              margin-right: 10px;
+            }
+            &:hover {
+              background-color: rgba(119, 119, 119, 0.1);
+            }
+          }
+        }
+        .open {
+          display: block;
+        }
+      }
+    }
+
+    .pagination {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      span {
+        font-size: 12px;
+      }
+      .total {
+        flex-direction: column;
+        display: flex;
+        align-items: center;
+        .control {
+          padding: 4px 20px;
+          font-size: 12px;
+        }
+      }
+      .numbring {
+        width: 50%;
+        flex-wrap: wrap;
+        display: flex;
+        justify-content: flex-end;
+        span {
+          font-size: 12px;
+        }
+        .active {
+          color: rgba(84, 95, 125, 1);
+          border: 1px solid red;
+        }
+        button {
+          border: none;
+          background: rgba(33, 63, 125, 0.1);
+          border-radius: 4px;
+          display: inline-block;
+          padding: 8px;
+          cursor: pointer;
+          width: 100%;
+          align-self: flex-end;
         }
       }
     }

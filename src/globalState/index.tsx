@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, FC, useState } from "react";
+import React, { createContext } from "react";
 import { getUsersApi, getUserApi } from "../api";
 
 type ProfileType = {

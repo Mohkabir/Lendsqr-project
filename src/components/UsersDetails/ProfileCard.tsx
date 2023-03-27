@@ -11,7 +11,6 @@ type User = {
 const ProfileCard = ({ userDetails, loading }: User) => {
   const setTab = (val: any) => {};
 
-  console.log(userDetails, "userDetails");
   return (
     <div className="profileCard">
       {loading && (

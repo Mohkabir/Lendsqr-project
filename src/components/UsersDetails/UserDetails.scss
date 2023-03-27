@@ -261,4 +261,134 @@
       }
     }
   }
+
+  @media (max-width: 760px) {
+    .back {
+      text-align: right;
+      width: 95%;
+      margin: 0 auto;
+      margin-top: 15px;
+    }
+    .pageHead {
+      width: 95%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin: 22px auto;
+
+      h3 {
+        font-size: 18px;
+        margin-bottom: 10px;
+      }
+      & > div {
+        button {
+          padding: 4px 10px;
+          margin-left: 0px;
+          margin-right: 10px;
+          font-size: 12px;
+        }
+      }
+    }
+    .profileCard {
+      width: 95%;
+      margin: 0 auto;
+      padding: 10px 5px;
+      .profileData {
+        justify-content: space-between;
+
+        & > div:nth-child(1) {
+          flex-direction: column;
+          align-items: flex-start;
+          width: 25%;
+          svg,
+          img {
+            width: 40px;
+            margin-right: 0px;
+          }
+          h3 {
+            font-size: 12px;
+            line-height: 14px;
+            margin: 0;
+          }
+          p {
+            margin-top: 0px;
+            font-size: 10px;
+          }
+        }
+
+        & > div:nth-child(2) {
+          padding: 5px 10px;
+          width: 35%;
+          p {
+            font-size: 12px;
+          }
+          .ratings {
+            margin-top: 5px;
+            svg {
+              margin-right: 3px;
+            }
+          }
+        }
+        & > div:nth-child(3) {
+          width: 35%;
+          padding-left: 0;
+          h3 {
+            font-size: 14px;
+            line-height: 16px;
+          }
+          p {
+            font-size: 10px;
+          }
+        }
+      }
+
+      .userDetailsNav {
+        margin-top: 20px;
+        ul {
+          flex-wrap: wrap;
+          align-items: flex-start;
+          li {
+            border-bottom: none;
+            width: 30%;
+            padding: 0px;
+            font-size: 10px;
+            margin-bottom: 10px;
+          }
+          .active {
+            border-bottom: none;
+          }
+        }
+      }
+    }
+
+    .otherUserInfo {
+      padding: 5px;
+      width: 95%;
+      margin: 0 auto;
+      & > div {
+        & > div {
+          & > div {
+            width: 45%;
+            & > div {
+              width: 45%;
+            }
+          }
+        }
+      }
+      & > div:nth-child(1) {
+        & > div {
+          & > div {
+            width: 45%;
+          }
+        }
+      }
+      & > div:nth-child(2) {
+        & > div {
+          & > div {
+            width: 45%;
+          }
+        }
+      }
+    }
+  }
 }
