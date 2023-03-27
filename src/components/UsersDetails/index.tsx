@@ -7,7 +7,7 @@ import OtherUserInfo from "./OtherUserInfo";
 import ProfileCard from "./ProfileCard";
 import "./UserDetails.scss";
 
-const UserDetails = () => {
+const UserDetailsPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -63,4 +63,4 @@ const UserDetails = () => {
   );
 };
 
-export default UserDetails;
+export default UserDetailsPage;

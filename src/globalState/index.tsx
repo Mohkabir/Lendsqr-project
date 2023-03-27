@@ -149,7 +149,6 @@ const UserProvider = ({ children }: Props) => {
       }
       return user;
     });
-    console.log(id, userDetails, status, "userrr");
     setUsers(userDetails);
   };
 

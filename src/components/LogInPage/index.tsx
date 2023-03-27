@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext } from "react";
+import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 import "./Landing.scss";
@@ -8,7 +8,7 @@ import Btn from "../Button";
 import { IUser } from "../../globalState";
 import { getUsersApi } from "../../api";
 
-function LandingPage() {
+function LogInPage() {
   const navigate = useNavigate();
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
@@ -119,4 +119,4 @@ function LandingPage() {
   );
 }
 
-export default LandingPage;
+export default LogInPage;
