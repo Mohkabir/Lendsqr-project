@@ -13,6 +13,7 @@
     }
   }
   .search {
+    position: relative;
     width: 30%;
     .inputGroup {
       width: 100%;
@@ -39,6 +40,38 @@
         padding: 13px 20px;
         border-bottom-right-radius: 8px;
         border-top-right-radius: 8px;
+      }
+    }
+    .searchResult {
+      width: 100%;
+      max-height: 300px;
+      position: absolute;
+      top: 50px;
+      padding: 0px;
+      background: #ffffff;
+      border: 1px solid rgba(84, 95, 125, 0.14);
+      box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
+      border-radius: 4px;
+      overflow-y: scroll;
+      a {
+        text-decoration: none;
+        p {
+          padding: 15px;
+          word-break: break-all;
+          text-align: left;
+          &:hover {
+            background: rgba(0, 0, 0, 0.04);
+            cursor: pointer;
+          }
+          span {
+            font-size: 14px;
+            color: green;
+          }
+        }
+      }
+      p {
+        padding: 15px;
+        text-align: center;
       }
     }
   }

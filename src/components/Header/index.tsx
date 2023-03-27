@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { IUser, UserContext, UserContextType } from "../../globalState";
 import {
   CaretDown,
   LogoIcon,
@@ -11,6 +12,27 @@ import "./Header.scss";
 
 const Header = () => {
   const [isMenu, setIsMenu] = useState<boolean>(false);
+  const [searchResults, setSearchResults] = useState<IUser[]>([]);
+  const { loading, users } = useContext(UserContext) as UserContextType;
+  const [search, setSearch] = useState("");
+
+  const filterSearch = (val: string) => {
+    const res = users.filter((user) => {
+      if (
+        user.userName.toLowerCase().includes(val) ||
+        user.orgName.toLowerCase().includes(val) ||
+        user.email.toLowerCase().includes(val) ||
+        user.phoneNumber.toLowerCase().includes(val) ||
+        user.status.toLowerCase().includes(val)
+      ) {
+        return user;
+      }
+    });
+    setSearchResults(res);
+    if (val === "") {
+      setSearchResults([]);
+    }
+  };
 
   return (
     <div className="header">
@@ -21,11 +43,36 @@ const Header = () => {
       </div>
       <div className="search">
         <div className="inputGroup">
-          <input placeholder="Search for anything" type="text" />
+          <input
+            placeholder="Search for anything"
+            type="text"
+            value={search}
+            onChange={(e) => {
+              setSearch(e.target.value);
+              filterSearch(e.target.value);
+            }}
+          />
           <button>
             <SearchIcon />
           </button>
         </div>
+        {search.length > 0 && (
+          <div className="searchResult">
+            {searchResults.map((user) => (
+              <Link to={`/users/${user.id}`}>
+                <p>
+                  <span> Organization: </span>
+                  {user.orgName}
+                  <span> Username: </span> {user.userName}
+                  <span> Email: </span>
+                  {user.email}
+                  <span> Status: </span> {user.status}
+                </p>
+              </Link>
+            ))}
+            {search !== "" && !searchResults.length && <p>Not Found</p>}
+          </div>
+        )}
       </div>
       <div className="profile">
         <span>Docs</span>
