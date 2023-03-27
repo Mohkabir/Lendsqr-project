@@ -45,14 +45,13 @@ const UsersContents = () => {
   };
 
   const filterSearch = (val: any) => {
-    console.log(val, "vallllll");
+
     let filtered: any[] = [];
     users.forEach((user) => {
       if (user.status.toLowerCase().includes(val.status)) {
         filtered.push(user);
       }
       // if (user.orgName.toLowerCase().includes(val.org)) {
-      //   console.log(user, "user");
       //   filtered.push(user);
       // }
 
@@ -68,7 +67,6 @@ const UsersContents = () => {
       //   filtered.push(user);
       // }
     });
-    console.log(filtered, "filteredss");
     setfilterUsers(filtered);
   };
 

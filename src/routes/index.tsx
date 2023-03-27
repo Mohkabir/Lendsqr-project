@@ -2,8 +2,7 @@ import React from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import MainLayout from "../layouts";
 
-import Landing from "../pages/Landing";
-import NotFound from "../pages/NotFound";
+import Login from "../pages/Login";
 import OtherPages from "../pages/OtherPages";
 import Userdetails from "../pages/Userdetails";
 import Users from "../pages/Users";
@@ -40,7 +39,7 @@ const AllRoutes = () => {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<Landing />} />
+        <Route path="/" element={<Login />} />
       </Routes>
       <Routes>
         <Route
