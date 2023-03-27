@@ -82,15 +82,7 @@ const UserProvider = ({ children }: Props) => {
 
   const [loading, setLoading] = React.useState<boolean>(false);
 
-  const updateUser = (id: number) => {
-    // users.filter((todo: IUser) => {
-    //   if (todo.id === id) {
-    //     todo.status = true;
-    //     setUsers([...users]);
-    //   }
-    // });
-  };
-
+  const updateUser = (id: number) => {};
   const compareDates = (d1: string, d2: string) => {
     let date1 = new Date(d1).getTime();
     let date2 = new Date(d2).getTime();
