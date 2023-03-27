@@ -6,11 +6,11 @@ import loader from "../../assets/images/load-loading.gif";
 type User = {
   userDetails: IUser | null;
   loading: boolean;
+  switchTab: (val: number) => void;
+  tab: number;
 };
 
-const ProfileCard = ({ userDetails, loading }: User) => {
-  const setTab = (val: any) => {};
-
+const ProfileCard = ({ userDetails, loading, switchTab, tab }: User) => {
   return (
     <div className="profileCard">
       {loading && (
@@ -51,20 +51,44 @@ const ProfileCard = ({ userDetails, loading }: User) => {
 
       <div className="userDetailsNav">
         <ul>
-          <li className="active" onClick={() => setTab(1)}>
+          <li
+            className={`${tab === 0 && "active"}`}
+            onClick={() => switchTab(0)}
+          >
             General Details
           </li>
-          <li onClick={() => setTab(1)}>Documents</li>
-          <li>Bank Details</li>
-          <li className="active" onClick={() => setTab(1)}>
+          <li
+            className={`${tab === 1 && "active"}`}
+            onClick={() => switchTab(1)}
+          >
+            Documents
+          </li>
+          <li
+            className={`${tab === 2 && "active"}`}
+            onClick={() => switchTab(2)}
+          >
+            Bank Details
+          </li>
+          <li
+            className={`${tab === 3 && "active"}`}
+            onClick={() => switchTab(3)}
+          >
             Loans
           </li>
-          <li onClick={() => setTab(1)}>Savings</li>
-          <li onClick={() => setTab(1)}>App and System</li>
+          <li
+            className={`${tab === 4 && "active"}`}
+            onClick={() => switchTab(4)}
+          >
+            Savings
+          </li>
+          <li
+            className={`${tab === 5 && "active"}`}
+            onClick={() => switchTab(5)}
+          >
+            App and System
+          </li>
         </ul>
       </div>
-
-      {/* load-loading.gif */}
     </div>
   );
 };

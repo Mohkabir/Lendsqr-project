@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { IUser } from "../../globalState";
 import TableHead from "./TableHead";
 import UserRow from "./UserRow";
@@ -16,10 +16,6 @@ const UsersTable = ({ users, loading }: User) => {
   const [orgNames, setOrgNames] = useState<string[]>([]);
   const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
 
-  // const extractOrgName = () => {
-  //   const orgnames = users.map((user) => user.orgName);
-  //   setOrgNames(orgnames);
-  // };
   useEffect(() => {
     const orgnames = users.map((user) => user.orgName);
     setOrgNames(orgnames);
@@ -32,7 +28,7 @@ const UsersTable = ({ users, loading }: User) => {
 
   return (
     <div className="usertable">
-      <TableHead openFilter={() => setIsFilterOpen(true)} />
+      <TableHead openFilter={() => setIsFilterOpen(!isFilterOpen)} />
       {loading && (
         <div className="loading">
           <img src={loader} alt="" />
@@ -42,7 +38,7 @@ const UsersTable = ({ users, loading }: User) => {
         users.map((data, idx) => (
           <UserRow
             user={data}
-            openFilter={() => setIsFilterOpen(true)}
+            openFilter={() => setIsFilterOpen(!isFilterOpen)}
             idx={idx}
           />
         ))}

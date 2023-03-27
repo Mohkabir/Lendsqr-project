@@ -31,6 +31,7 @@ export interface IUser {
   guarantor: GuarantorType;
   accountBalance: string;
   accountNumber: string;
+  status: string;
   socials: {
     facebook: string;
     instagram: string;
@@ -55,7 +56,7 @@ export type UsersOverviewType = {
 export type UserContextType = {
   users: IUser[];
   userDetails: IUser | null;
-  updateUser: (id: number) => void;
+  updateUser: (id: string, currentUsers: IUser[], status: string) => void;
   getUsers: () => Promise<IUser[] | void>;
   getUser: (id: number) => Promise<IUser | void>;
   usersOverview: UsersOverviewType;
@@ -75,18 +76,15 @@ const UserProvider = ({ children }: Props) => {
 
   const [usersOverview, setUsersOverview] = React.useState<UsersOverviewType>({
     allUsers: 0,
-    activeUsers: 30,
+    activeUsers: 0,
     userWithLoans: 0,
-    usersWithSavings: 34,
+    usersWithSavings: 0,
   });
-
   const [loading, setLoading] = React.useState<boolean>(false);
 
-  const updateUser = (id: number) => {};
   const compareDates = (d1: string, d2: string) => {
     let date1 = new Date(d1).getTime();
     let date2 = new Date(d2).getTime();
-    console.log(d1, "=", date1, "--", d2, "=", date2, "\n", date1 > date2);
     if (date1 > date2) {
       return false;
     } else {
@@ -99,13 +97,10 @@ const UserProvider = ({ children }: Props) => {
 
     try {
       const res = await getUsersApi();
-      setUsers(res.data);
-
       let withLoans = 0;
       let withSavings = 0;
       let activeUsers = 0;
-
-      res.data.forEach((user: IUser) => {
+      let generated = res.data.map((user: IUser) => {
         if (
           Number(user?.accountBalance) -
             Number(user?.education?.loanRepayment) >
@@ -117,8 +112,12 @@ const UserProvider = ({ children }: Props) => {
         }
         if (compareDates(user.createdAt, user.lastActiveDate)) {
           activeUsers += 1;
+          return { ...user, status: "inactive" };
+        } else {
+          return { ...user, status: "pending" };
         }
       });
+      setUsers(generated);
       setUsersOverview({
         ...usersOverview,
         allUsers: res.data.length,
@@ -142,6 +141,16 @@ const UserProvider = ({ children }: Props) => {
     setLoading(false);
   };
 
+  const updateUser = (id: string, currentUsers: IUser[], status: string) => {
+    const userDetails = currentUsers.map((user) => {
+      if (user.id === id) {
+        return { ...user, status };
+      }
+      return user;
+    });
+    console.log(id, userDetails, status, "userrr");
+    setUsers(userDetails);
+  };
   return (
     <UserContext.Provider
       value={{

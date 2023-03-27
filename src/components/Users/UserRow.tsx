@@ -1,26 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import dayjs from "dayjs";
 
 import {
   ActionIcon,
   ActivateIcon,
-  ActiveUsers,
   BlacklistIcon,
   FilterIcon,
   ViewIcon,
 } from "../icons";
-import { IUser } from "../../globalState";
-
-type UserType = {
-  orgName: string;
-  createdAt: string;
-  userName: string;
-  email: string;
-  phoneNumber: string;
-  status: string;
-  id: string;
-};
+import { IUser, UserContext, UserContextType } from "../../globalState";
 
 type RowProps = {
   openFilter: () => void;
@@ -29,17 +18,21 @@ type RowProps = {
 };
 
 const UserRow = ({ user, idx, openFilter }: RowProps) => {
+  const { users, updateUser } = useContext(UserContext) as UserContextType;
+
   const [current, setCurrent] = useState<number | null>(null);
 
-  const { orgName, createdAt, userName, email, phoneNumber, id } = user;
-
-  const status = "pending";
+  const { orgName, createdAt, userName, email, phoneNumber, status, id } = user;
 
   const formatNumber = (val: string): any => {
     val = val.split("x")[0];
-    return val.replace(/[-\s?\.\(\)]/g, "");
+    return val.replace(/[-\s.()]/g, "");
   };
 
+  const handlAction = (val: string, userId: string) => {
+    updateUser(userId, users, val);
+    setCurrent(null);
+  };
   return (
     <>
       <div className="row">
@@ -54,9 +47,11 @@ const UserRow = ({ user, idx, openFilter }: RowProps) => {
         <p> {dayjs(createdAt).format("MMM D, YYYY h:mm A")}</p>
         <p>
           <span
-          // className={`${status === "Pending" && "pending"} ${
-          //   status === "Blacklisted" && "blacklist"
-          // } ${status === "Inactive" && "inactive"}`}
+            className={`${status === "pending" && "pending"} ${
+              status === "blacklisted" && "blacklist"
+            } ${status === "inactive" && "inactive"} ${
+              status === "active" && "active"
+            }`}
           >
             {status}
           </span>
@@ -76,12 +71,12 @@ const UserRow = ({ user, idx, openFilter }: RowProps) => {
                     <ViewIcon /> View Details
                   </Link>
                 </button>
-                <button>
+                <button onClick={() => handlAction("blacklisted", id)}>
                   <span>
                     <BlacklistIcon /> Blacklist User
                   </span>
                 </button>
-                <button>
+                <button onClick={() => handlAction("active", id)}>
                   <span>
                     <ActivateIcon /> Activate User
                   </span>
@@ -113,12 +108,12 @@ const UserRow = ({ user, idx, openFilter }: RowProps) => {
                     <ViewIcon /> View Details
                   </Link>
                 </button>
-                <button>
+                <button onClick={() => handlAction("blacklisted", id)}>
                   <span>
                     <BlacklistIcon /> Blacklist User
                   </span>
                 </button>
-                <button>
+                <button onClick={() => handlAction("active", id)}>
                   <span>
                     <ActivateIcon /> Activate User
                   </span>
@@ -148,6 +143,16 @@ const UserRow = ({ user, idx, openFilter }: RowProps) => {
         </div>
         <div>
           <p>status</p>
+          <p
+            style={{ textAlign: "center" }}
+            className={`${status === "pending" && "pending"} ${
+              status === "blacklisted" && "blacklist"
+            } ${status === "inactive" && "inactive"} ${
+              status === "active" && "active"
+            }`}
+          >
+            {status}
+          </p>
         </div>
       </div>
     </>

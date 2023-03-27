@@ -128,23 +128,6 @@
         cursor: pointer;
       }
 
-      .inactive {
-        background: rgba(84, 95, 125, 0.06);
-        text-align: center;
-        color: #545f7d;
-      }
-      .pending {
-        background: rgba(233, 178, 0, 0.1);
-        color: #e9b200;
-      }
-      .blacklist {
-        background: rgba(228, 3, 59, 0.1);
-        color: #e4033b;
-      }
-      .active {
-        background: rgba(57, 205, 98, 0.06);
-        color: #39cd62;
-      }
       .actions {
         position: relative;
         & > button {
@@ -193,7 +176,23 @@
       }
     }
   }
-
+  .inactive {
+    background: rgba(84, 95, 125, 0.06);
+    text-align: center;
+    color: #545f7d;
+  }
+  .pending {
+    background: rgba(233, 178, 0, 0.1);
+    color: #e9b200;
+  }
+  .blacklist {
+    background: rgba(228, 3, 59, 0.1);
+    color: #e4033b;
+  }
+  .active {
+    background: rgba(57, 205, 98, 0.06);
+    color: #39cd62;
+  }
   .pagination {
     display: flex;
     justify-content: space-between;
