@@ -1,32 +1,48 @@
 import React from "react";
 import { FilterIcon } from "../icons";
 
-const TableHead = () => {
+type TableProps = {
+  openFilter: () => void;
+};
+
+const TableHead = ({ openFilter }: TableProps) => {
   return (
     <div className="tableHead">
       <p>
-        organization
-        <FilterIcon />
+        Organization
+        <button onClick={() => openFilter()}>
+          <FilterIcon />
+        </button>
       </p>
       <p>
-        username
-        <FilterIcon />
+        Username
+        <button onClick={() => openFilter()}>
+          <FilterIcon />
+        </button>
       </p>
       <p>
-        email
-        <FilterIcon />
+        Email
+        <button onClick={() => openFilter()}>
+          <FilterIcon />
+        </button>
       </p>
       <p>
-        phoneNumber
-        <FilterIcon />
+        Phone Number
+        <button onClick={() => openFilter()}>
+          <FilterIcon />
+        </button>
       </p>
       <p>
-        createdAt
-        <FilterIcon />
+        Date joined
+        <button onClick={() => openFilter()}>
+          <FilterIcon />
+        </button>
       </p>
       <p>
-        status
-        <FilterIcon />
+        Status
+        <button onClick={() => openFilter()}>
+          <FilterIcon />
+        </button>
       </p>
     </div>
   );

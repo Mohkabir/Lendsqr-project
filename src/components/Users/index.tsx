@@ -6,6 +6,7 @@ import "./Users.scss";
 import UsersTable from "./UsersTable";
 
 const UsersContents = () => {
+
   const { loading, users, getUsers } = useContext(
     UserContext
   ) as UserContextType;
@@ -42,7 +43,10 @@ const UsersContents = () => {
     <div className="users">
       <h3>Users</h3>
       <Cards />
-      <UsersTable users={currentTemplate} loading={loading} />
+      <UsersTable
+        users={currentTemplate}
+        loading={loading}
+      />
       <Pagination
         currentPage={currentPage}
         numberOfPages={numberOfPages}
