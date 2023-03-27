@@ -40,6 +40,12 @@
     background: #ffffff;
     box-shadow: 0px 15px 90px rgba(0, 0, 0, 0.03);
     justify-content: center;
+    .forgotP {
+      margin-bottom: -70px;
+      button {
+        margin-top: 40px;
+      }
+    }
     h1 {
       font-weight: 600;
     }
@@ -52,6 +58,7 @@
       margin: 24px 0px;
       display: block;
       letter-spacing: 0.1em;
+      cursor: pointer;
     }
     form {
       height: 65%;
@@ -110,7 +117,7 @@
       width: 90%;
       margin-top: 20px;
       svg {
-        width: 30%;
+        width: 40%;
       }
     }
     .box1 {

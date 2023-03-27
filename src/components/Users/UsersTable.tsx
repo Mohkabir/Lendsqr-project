@@ -6,15 +6,39 @@ import loader from "../../assets/images/load-loading.gif";
 import Btn from "../Button";
 import { DateIcon } from "../icons";
 
-type User = {
-  users: IUser[];
-  loading: boolean;
+export type FilterPayload = {
+  username: string | undefined;
+  email: string | undefined;
+  phone: number | undefined;
+  date: string | undefined;
+  org: string | undefined;
+  status: string | undefined;
 };
 
-const UsersTable = ({ users, loading }: User) => {
-  const dateRef = useRef<HTMLInputElement>(null);
+type UserType = {
+  filterUsers: IUser[];
+  users: IUser[];
+  loading: boolean;
+  handleReset: () => void;
+  handleFilter: (payload: FilterPayload | undefined) => void;
+};
+
+const UsersTable = ({
+  filterUsers,
+  users,
+  loading,
+  handleFilter,
+  handleReset,
+}: UserType) => {
   const [orgNames, setOrgNames] = useState<string[]>([]);
   const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
+
+  const dateRef = useRef<HTMLInputElement>(null);
+  const usernameRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+  const phoneRef = useRef<HTMLInputElement>(null);
+  const orgRef = useRef<HTMLSelectElement>(null);
+  const statusRef = useRef<HTMLSelectElement>(null);
 
   useEffect(() => {
     const orgnames = users.map((user) => user.orgName);
@@ -22,8 +46,20 @@ const UsersTable = ({ users, loading }: User) => {
   }, [users]);
 
   const openDate = () => {
-    console.log("cloked..");
     dateRef.current?.showPicker();
+  };
+
+  const handleFilterUsers = () => {
+    const payload = {
+      username: usernameRef?.current?.value,
+      email: emailRef?.current?.value,
+      phone: Number(phoneRef?.current?.value),
+      date: dateRef?.current?.value,
+      org: orgRef?.current?.value,
+      status: statusRef?.current?.value,
+    };
+    handleFilter(payload);
+    setIsFilterOpen(false);
   };
 
   return (
@@ -35,13 +71,18 @@ const UsersTable = ({ users, loading }: User) => {
         </div>
       )}
       {!loading &&
-        users.map((data, idx) => (
+        filterUsers.map((data, idx) => (
           <UserRow
             user={data}
             openFilter={() => setIsFilterOpen(!isFilterOpen)}
             idx={idx}
           />
         ))}
+      {!loading && filterUsers.length < 1 && (
+        <div className="notFound">
+          <p>No Data</p>
+        </div>
+      )}
 
       {isFilterOpen && (
         <div className="filter">
@@ -53,7 +94,7 @@ const UsersTable = ({ users, loading }: User) => {
 
           <div className="group">
             <h6>Organization</h6>
-            <select name="organization">
+            <select name="organization" ref={orgRef}>
               <>
                 <option selected value="" disabled className="default">
                   Select
@@ -66,11 +107,11 @@ const UsersTable = ({ users, loading }: User) => {
           </div>
           <div className="group">
             <h6>Username</h6>
-            <input type="text" placeholder="Username" />
+            <input type="text" placeholder="Username" ref={usernameRef} />
           </div>
           <div className="group">
             <h6>Email</h6>
-            <input placeholder="Email" type="text" />
+            <input placeholder="Email" type="text" ref={emailRef} />
           </div>
           <div className="group">
             <h6>Date</h6>
@@ -83,17 +124,29 @@ const UsersTable = ({ users, loading }: User) => {
           </div>
           <div className="group">
             <h6>Phone Number</h6>
-            <input type="number" placeholder="Phone Number" />
+            <input type="number" placeholder="Phone Number" ref={phoneRef} />
           </div>
           <div className="group">
             <h6>Status</h6>
-            <select name="" id="">
-              <option value=""></option>
+            <select name="" ref={statusRef}>
+              <option value="" disabled selected>
+                Status
+              </option>
+              <option value="active">Active</option>
+              <option value="inactive">Inactive</option>
+              <option value="blacklist">Blacklist</option>
+              <option value="pending">Pending</option>
             </select>
           </div>
           <div className="btnGroup">
-            <Btn title="Reset" />
-            <Btn title="Filter" primary />
+            <Btn
+              title="Reset"
+              action={() => {
+                handleReset();
+                setIsFilterOpen(false);
+              }}
+            />
+            <Btn title="Filter" primary action={() => handleFilterUsers()} />
           </div>
         </div>
       )}

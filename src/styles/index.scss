@@ -152,6 +152,13 @@ span {
   height: 100%;
   text-transform: capitalize;
 }
+.notFound {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 150px;
+  text-transform: capitalize;
+}
 .cancelSideNav {
   cursor: pointer;
   background-color: inherit;

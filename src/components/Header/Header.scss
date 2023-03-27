@@ -78,26 +78,71 @@
   .profile {
     width: 25%;
     display: flex;
-    // justify-content: space-between;
     align-items: center;
     .profile_img {
-      border: 1px solid #777777;
       width: 48px;
       height: 48px;
       border-radius: 50px;
       overflow: hidden;
       margin: 0 10px;
       margin-left: 30px;
+      position: relative;
+      svg {
+        position: absolute;
+        top: 0;
+        left: -19px;
+        width: 100%;
+        height: 100%;
+      }
     }
-    span {
+    & > span {
       border-bottom: 1px solid var(--primary);
     }
     svg {
-      margin-left: 40px;
+      margin-left: 20px;
+      width: 40px;
     }
     p {
       font-size: 16px;
       line-height: 19px;
+      display: flex;
+      align-items: center;
+      // border: 1px solid red;
+      position: relative;
+      span {
+        width: 50%;
+        word-break: break-all;
+      }
+      & > svg {
+        margin-left: 20px;
+        width: 10px;
+        height: 10px;
+        cursor: pointer;
+      }
+      button {
+        background-color: inherit;
+        border: none;
+        cursor: pointer;
+      }
+      .dropdown {
+        position: absolute;
+        top: 30px;
+        right: 0px;
+        width: 100px;
+        height: 60px;
+        background: #ffffff;
+        border: 1px solid rgba(33, 63, 125, 0.06);
+        box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
+        border-radius: 4px;
+        padding: 10px 5px;
+        p {
+          padding: 10px;
+          cursor: pointer;
+          &:hover {
+            background-color: rgba(0, 0, 0, 0.04);
+          }
+        }
+      }
     }
   }
   .menuBar {

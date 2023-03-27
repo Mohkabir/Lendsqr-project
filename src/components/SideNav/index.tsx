@@ -1,5 +1,6 @@
-import React, { FC } from "react";
-import { NavLink } from "react-router-dom";
+import React, { FC, useContext } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import { UserContext, UserContextType } from "../../globalState";
 import {
   AuditIcon,
   DashboardIcon,
@@ -29,6 +30,14 @@ interface CloseInterface {
   closeSideNav(): void;
 }
 const SideNav: FC<CloseInterface> = ({ closeSideNav }) => {
+  const { LogOut } = useContext(UserContext) as UserContextType;
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    let res = LogOut();
+    if (res === "done") {
+      navigate("/");
+    }
+  };
   return (
     <div className="sideNav">
       <ul>
@@ -108,7 +117,7 @@ const SideNav: FC<CloseInterface> = ({ closeSideNav }) => {
         <NavLink to="/systems-messages">
           <SystemsIcons /> Systems Messages
         </NavLink>
-        <h5 className="switch logout">
+        <h5 className="switch logout" onClick={() => handleLogout()}>
           <LogOutIcon /> Logout
         </h5>
       </ul>
