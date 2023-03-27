@@ -1,8 +1,8 @@
 import React from "react";
-import UsersContents from "../components/Users";
+import UsersPage from "../components/UsersPage";
 
 const Users = () => {
-  return <UsersContents />;
+  return <UsersPage />;
 };
 
 export default Users;

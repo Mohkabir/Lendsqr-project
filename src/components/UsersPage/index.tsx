@@ -3,9 +3,9 @@ import { IUser, UserContext, UserContextType } from "../../globalState";
 import Cards from "./Cards";
 import Pagination from "./Pagination";
 import "./Users.scss";
-import UsersTable, { FilterPayload } from "./UsersTable";
+import UsersTable from "./UsersTable";
 
-const UsersContents = () => {
+const UsersPage = () => {
   const { loading, users, getUsers, usersOverview } = useContext(
     UserContext
   ) as UserContextType;
@@ -45,7 +45,6 @@ const UsersContents = () => {
   };
 
   const filterSearch = (val: any) => {
-
     let filtered: any[] = [];
     users.forEach((user) => {
       if (user.status.toLowerCase().includes(val.status)) {
@@ -99,4 +98,4 @@ const UsersContents = () => {
   );
 };
 
-export default UsersContents;
+export default UsersPage;
