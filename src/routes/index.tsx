@@ -4,7 +4,7 @@ import MainLayout from "../layouts";
 
 import Login from "../pages/Login";
 import OtherPages from "../pages/OtherPages";
-import Userdetails from "../pages/Userdetails";
+import UserDetails from "../pages/Userdetails";
 import Users from "../pages/Users";
 
 const AllRoutes = () => {
@@ -56,7 +56,7 @@ const AllRoutes = () => {
           path="/users/:id"
           element={
             <MainLayout>
-              <Userdetails />
+              <UserDetails />
             </MainLayout>
           }
         />
