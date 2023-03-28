@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import "./Landing.scss";
@@ -16,6 +16,13 @@ function LogInPage() {
   const [loading, setLoading] = useState<boolean>(false);
   const [isForgotPassword, setIsForgotPassword] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
+
+  useEffect(() => {
+    let user: string | null = localStorage.getItem("user");
+    if (user) {
+      navigate("/users");
+    }
+  }, [navigate]);
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -118,7 +125,13 @@ function LogInPage() {
               >
                 FORGOT PASSWORD?
               </span>
-              <Btn title={loading ? "LOADING..." : "LOG IN"} primary />
+              <Btn
+                disabled={false}
+                // disabled={true}
+                name="pay"
+                title={loading ? "LOADING..." : "LOG IN"}
+                primary
+              />
             </div>
           </form>
         )}

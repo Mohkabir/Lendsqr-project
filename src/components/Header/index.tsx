@@ -52,15 +52,6 @@ const Header = () => {
     }
   };
 
-  // const getCurrentUser = () => {
-  //   let user: string | null = localStorage.getItem("user");
-  //   if (user) {
-  //     setUser(JSON.parse(user));
-  //   } else {
-  //     navigate("/");
-  //   }
-  // };
-
   useEffect(() => {
     let user: string | null = localStorage.getItem("user");
     if (user) {
