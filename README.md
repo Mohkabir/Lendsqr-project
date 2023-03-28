@@ -1,4 +1,4 @@
-# This a frontend assessement by LENDSQR
+# This a Frontend Assessement by Lendsqr
 
 This project was bootstrapped with Create React App - Typescript
 
