@@ -81,7 +81,16 @@ const UsersTable = ({
         ))}
       {!loading && filterUsers.length < 1 && (
         <div className="notFound">
-          <p>No Data</p>
+          <div>
+            <p>No Data</p>
+            <Btn
+              title="Reset"
+              action={() => {
+                handleReset();
+                setIsFilterOpen(false);
+              }}
+            />
+          </div>
         </div>
       )}
 

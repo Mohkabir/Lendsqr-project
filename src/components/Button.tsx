@@ -1,5 +1,5 @@
 
-interface BtnProps {
+export interface BtnProps {
   title: string;
   action?(): any;
   primary?: boolean;

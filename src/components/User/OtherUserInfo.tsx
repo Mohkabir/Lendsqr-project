@@ -11,7 +11,7 @@ type User = {
 const OtherUserInfo = ({ userDetails, loading, tab }: User) => {
   if (loading) {
     return (
-      <div className="loading">
+      <div className="loading otherUserInfo">
         <img src={loader} alt="" />
       </div>
     );

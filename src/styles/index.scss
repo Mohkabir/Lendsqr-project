@@ -158,6 +158,13 @@ span {
   align-items: center;
   height: 150px;
   text-transform: capitalize;
+  & > div {
+    width: 50%;
+    text-align: center;
+    button {
+      margin-top: 20px;
+    }
+  }
 }
 .cancelSideNav {
   cursor: pointer;
