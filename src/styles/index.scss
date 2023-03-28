@@ -56,11 +56,6 @@ h1 {
   line-height: 55px;
 }
 
-// h2 {
-//   font-weight: 400;
-//   font-size: 20px;
-//   line-height: 27px;
-// }
 h3 {
   font-weight: 500;
   font-size: 24px;
@@ -198,20 +193,19 @@ span {
 
 .tool_tip {
   position: relative;
-  // display: inline-block;
   cursor: pointer;
 }
 
 .tool_tip .tool_tiptext {
   visibility: hidden;
-  width: 150px;
-  background-color: #39cdcc;
-  color: #fff;
+  width: 180px;
+  background-color: rgba(84, 95, 125, 0.3);
+  color: black;
   text-align: center;
   border-radius: 6px;
-  padding: 5px 0;
+  padding: 5px;
   position: absolute;
-  top: -30px;
+  top: -40px;
   left: 0;
   z-index: 1;
   font-size: 12px;

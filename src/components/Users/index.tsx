@@ -39,21 +39,25 @@ const Users = () => {
 
   const filterSearch = (val: any) => {
     console.log(val, "val");
-    let filtered: any[] = [];
+    const filtered: any[] = [];
     users.forEach((user) => {
       const formated = new Date(user.createdAt).toISOString().split("T")[0];
+      // console.log(
+      //   user.phoneNumber,
+      //   val.phone,
+      //   user.phoneNumber.includes(val.phone)
+      // );
       console.log(
-        user.phoneNumber,
-        val.phone,
-        user.phoneNumber.includes(val.phone)
+        user.orgName.toLowerCase().includes(val.org.toLowerCase()),
+        "orggg"
       );
       if (
         user.status.toLowerCase().includes(val.status.toLowerCase()) &&
         user.orgName.toLowerCase().includes(val.org.toLowerCase()) &&
         user.userName.toLowerCase().includes(val?.username.toLowerCase()) &&
         user.email.toLowerCase().includes(val.email.toLowerCase()) &&
-        user.phoneNumber.includes(val.phone) &&
         formated === val.date
+        // user.phoneNumber.includes(val.phone)
       ) {
         filtered.push(user);
       }
