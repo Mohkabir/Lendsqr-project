@@ -15,28 +15,32 @@ function LogInPage() {
   const [isShow, setIsShow] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [isForgotPassword, setIsForgotPassword] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
+    try {
+      const res = await getUsersApi();
+      const user = res.data.filter(
+        (user: IUser) => user.email === emailRef?.current?.value
+      );
 
-    const res = await getUsersApi();
-    const user = res.data.filter(
-      (user: IUser) => user.email === emailRef?.current?.value
-    );
-
-    let payload = {
-      email: emailRef?.current?.value,
-      password: passwordRef?.current?.value,
-      avatar: "",
-    };
-    if (user.length) {
-      payload.email = user[0].email;
-      payload.avatar = user[0].profile.avatar;
+      let payload = {
+        email: emailRef?.current?.value,
+        password: passwordRef?.current?.value,
+        avatar: "",
+      };
+      if (user.length) {
+        payload.email = user[0].email;
+        payload.avatar = user[0].profile.avatar;
+      }
+      localStorage.setItem("user", JSON.stringify(payload));
+      setLoading(false);
+      navigate("/users");
+    } catch (error) {
+      setError(true);
     }
-    localStorage.setItem("user", JSON.stringify(payload));
-    setLoading(false);
-    navigate("/users");
   };
 
   return (
@@ -58,6 +62,7 @@ function LogInPage() {
           <div className="forgotP">
             <div className="welcome">
               <h1>Welcome!</h1>
+
               <p>
                 Note: You can log in with a random <br /> Email and Password
               </p>
@@ -84,6 +89,9 @@ function LogInPage() {
               <div className="welcome">
                 <h1>Welcome!</h1>
                 <p>Enter details to login.</p>
+                {error && (
+                  <p className="error">Something went wrong try again</p>
+                )}
               </div>
               <div className="inputGroup">
                 <input

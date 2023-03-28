@@ -1,5 +1,7 @@
 import React, { createContext } from "react";
 import { getUsersApi, getUserApi } from "../api";
+import dayjs from "dayjs";
+import { compareDates, formatNumber } from "../utils";
 
 type ProfileType = {
   firstName: string;
@@ -83,15 +85,19 @@ const UserProvider = ({ children }: Props) => {
   });
   const [loading, setLoading] = React.useState<boolean>(false);
 
-  const compareDates = (d1: string, d2: string) => {
-    let date1 = new Date(d1).getTime();
-    let date2 = new Date(d2).getTime();
-    if (date1 > date2) {
-      return false;
-    } else {
-      return true;
-    }
-  };
+  // const compareDates = (d1: string, d2: string) => {
+  //   let date1 = new Date(d1).getTime();
+  //   let date2 = new Date(d2).getTime();
+  //   if (date1 > date2) {
+  //     return false;
+  //   } else {
+  //     return true;
+  //   }
+  // };
+  // const formatNumber = (val: string): any => {
+  //   val = val.split("x")[0];
+  //   return val.replace(/[-\s.()]/g, "");
+  // };
 
   const getUsers = async () => {
     setLoading(true);
@@ -111,11 +117,22 @@ const UserProvider = ({ children }: Props) => {
         } else {
           withSavings += 1;
         }
+
         if (compareDates(user.createdAt, user.lastActiveDate)) {
           activeUsers += 1;
-          return { ...user, status: "inactive" };
+          return {
+            ...user,
+            status: "inactive",
+            createdAt: dayjs(user.createdAt).format("MMM D, YYYY h:mm A"),
+            phoneNumber: formatNumber(user.phoneNumber),
+          };
         } else {
-          return { ...user, status: "pending" };
+          return {
+            ...user,
+            status: "pending",
+            createdAt: dayjs(user.createdAt).format("MMM D, YYYY h:mm A"),
+            phoneNumber: formatNumber(user.phoneNumber),
+          };
         }
       });
       setUsers(generated);

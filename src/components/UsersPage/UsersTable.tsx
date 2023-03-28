@@ -9,7 +9,7 @@ import { DateIcon } from "../icons";
 export type FilterPayload = {
   username: string | undefined;
   email: string | undefined;
-  phone: number | undefined;
+  phone: string | undefined;
   date: string | undefined;
   org: string | undefined;
   status: string | undefined;
@@ -32,6 +32,7 @@ const UsersTable = ({
 }: UserType) => {
   const [orgNames, setOrgNames] = useState<string[]>([]);
   const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
+  const [dateValue, setdateValue] = useState<string>("");
 
   const dateRef = useRef<HTMLInputElement>(null);
   const usernameRef = useRef<HTMLInputElement>(null);
@@ -53,8 +54,8 @@ const UsersTable = ({
     const payload = {
       username: usernameRef?.current?.value,
       email: emailRef?.current?.value,
-      phone: Number(phoneRef?.current?.value),
-      date: dateRef?.current?.value,
+      phone: phoneRef?.current?.value,
+      date: dateValue,
       org: orgRef?.current?.value,
       status: statusRef?.current?.value,
     };
@@ -116,9 +117,15 @@ const UsersTable = ({
           <div className="group">
             <h6>Date</h6>
             <div className="date">
-              <input type="date" name="date" ref={dateRef} />
+              <input
+                type="date"
+                name="date"
+                value={dateValue}
+                ref={dateRef}
+                onChange={(e) => setdateValue(e.target.value)}
+              />
               <span onClick={openDate}>
-                Date <DateIcon />
+                {dateValue || "Date"} <DateIcon />
               </span>
             </div>
           </div>

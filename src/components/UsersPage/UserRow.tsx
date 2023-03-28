@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import dayjs from "dayjs";
 
 import {
   ActionIcon,
@@ -24,11 +23,6 @@ const UserRow = ({ user, idx, openFilter }: RowProps) => {
 
   const { orgName, createdAt, userName, email, phoneNumber, status, id } = user;
 
-  const formatNumber = (val: string): any => {
-    val = val.split("x")[0];
-    return val.replace(/[-\s.()]/g, "");
-  };
-
   const handlAction = (val: string, userId: string) => {
     updateUser(userId, users, val);
     setCurrent(null);
@@ -43,8 +37,8 @@ const UserRow = ({ user, idx, openFilter }: RowProps) => {
         <p>{orgName}</p>
         <p>{userName}</p>
         <p>{email}</p>
-        <p>{formatNumber(phoneNumber)}</p>
-        <p> {dayjs(createdAt).format("MMM D, YYYY h:mm A")}</p>
+        <p>{phoneNumber}</p>
+        <p> {createdAt}</p>
         <p>
           <span
             className={`${status === "pending" && "pending"} ${
@@ -135,11 +129,11 @@ const UserRow = ({ user, idx, openFilter }: RowProps) => {
         </div>
         <div>
           <p>phone Number</p>
-          <p>{formatNumber(phoneNumber)}</p>
+          <p>{phoneNumber}</p>
         </div>
         <div>
           <p>Date joined</p>
-          <p>{dayjs(createdAt).format("MMM D, YYYY h:mm A")}</p>
+          <p>{createdAt}</p>
         </div>
         <div>
           <p>status</p>

@@ -9,7 +9,6 @@ const UsersPage = () => {
   const { loading, users, getUsers, usersOverview } = useContext(
     UserContext
   ) as UserContextType;
-
   const [filterUsers, setfilterUsers] = useState<IUser[]>(users);
 
   useEffect(() => {
@@ -45,28 +44,29 @@ const UsersPage = () => {
   };
 
   const filterSearch = (val: any) => {
+    console.log(val, "val");
     let filtered: any[] = [];
     users.forEach((user) => {
-      if (user.status.toLowerCase().includes(val.status)) {
+      const formated = new Date(user.createdAt).toISOString().split("T")[0];
+
+      console.log(
+        user.phoneNumber,
+        val.phone,
+        user.phoneNumber.includes(val.phone)
+      );
+      if (
+        user.status.toLowerCase().includes(val.status.toLowerCase()) &&
+        user.orgName.toLowerCase().includes(val.org.toLowerCase()) &&
+        user.userName.toLowerCase().includes(val?.username.toLowerCase()) &&
+        user.email.toLowerCase().includes(val.email.toLowerCase()) &&
+        user.phoneNumber.includes(val.phone) &&
+        formated === val.date
+      ) {
         filtered.push(user);
       }
-      // if (user.orgName.toLowerCase().includes(val.org)) {
-      //   filtered.push(user);
-      // }
-
-      // if (
-      //   user.userName.toLowerCase().includes(val?.username) ||
-      //   user.orgName.toLowerCase().includes(val.org) ||
-      //   user.email.toLowerCase().includes(val.email) ||
-      //   user.phoneNumber.toLowerCase().includes(val.phone) ||
-      //   user.orgName.toLowerCase().includes(val.org) ||
-      //   user.status.toLowerCase().includes(val.status)
-      // ) {
-      //   filtered.push(user);
-      //   filtered.push(user);
-      // }
     });
-    setfilterUsers(filtered);
+    console.log(filtered, "filtered");
+    setfilterUsers(() => filtered);
   };
 
   const handleFilter = (val: any) => {
