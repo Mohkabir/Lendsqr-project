@@ -6,16 +6,10 @@ import "./Users.scss";
 import UsersTable from "./UsersTable";
 
 const Users = () => {
-  const { loading, users, getUsers, usersOverview } = useContext(
+  const { loading, users, usersOverview } = useContext(
     UserContext
   ) as UserContextType;
   const [filterUsers, setfilterUsers] = useState<IUser[]>(users);
-
-  useEffect(() => {
-    if (!users.length) {
-      getUsers();
-    }
-  }, [getUsers, users]);
 
   useEffect(() => {
     setfilterUsers(users);

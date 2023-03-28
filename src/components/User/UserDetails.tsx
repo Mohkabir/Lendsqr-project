@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { UserContext, UserContextType } from "../../globalState";
 
 import { BackIcon } from "../icons";
@@ -9,17 +9,20 @@ import "./UserDetails.scss";
 
 const UserDetails = () => {
   const navigate = useNavigate();
-  const location = useLocation();
-
+  const params = useParams();
   const [tab, setTab] = useState<number>(0);
 
   const { loading, users, userDetails, updateUser, getUser } = useContext(
     UserContext
   ) as UserContextType;
 
+  const fetchUser = () => {
+    getUser(Number(params.id));
+  };
+
   useEffect(() => {
-    getUser(Number(location.pathname.split("/")[2]));
-  }, [location.pathname]);
+    fetchUser();
+  }, []);
 
   const handlAction = (val: string, userId: string | undefined) => {
     if (userId) {
