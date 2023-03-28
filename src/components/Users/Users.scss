@@ -22,7 +22,6 @@
         font-weight: 600;
       }
       p {
-        // font-size: 14px;
         line-height: 16px;
         text-transform: uppercase;
       }
@@ -91,15 +90,10 @@
     }
     & > p:nth-child(1) {
       width: 16%;
-      // word-break: keep-all;
-      overflow-y: hidden;
-
       .text {
         width: 100%;
         display: block;
-        // border: 1px solid red;
         font-size: 14px;
-        word-break: keep-all !important;
       }
     }
     & > p:nth-child(3) {
@@ -118,7 +112,7 @@
       align-items: center;
       span {
         display: inline-block;
-        padding: 7px 14px;
+        padding: 7px 10px;
         font-weight: 400;
         font-size: 14px;
         line-height: 16px;
@@ -188,7 +182,6 @@
   .blacklist {
     background: rgba(228, 3, 59, 0.1);
     color: #e4033b;
-    font-size: 12px;
   }
   .active {
     background: rgba(57, 205, 98, 0.06);
@@ -500,6 +493,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      margin-bottom: 140px;
       span {
         font-size: 12px;
       }
@@ -519,6 +513,11 @@
         justify-content: flex-end;
         span {
           font-size: 12px;
+
+          margin: 4px;
+          display: inline-block;
+          padding: 3px 5px;
+          background-color: rgba(84, 95, 125, 0.11);
         }
         .active {
           color: rgba(84, 95, 125, 1);

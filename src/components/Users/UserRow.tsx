@@ -30,13 +30,21 @@ const UserRow = ({ user, idx, openFilter }: RowProps) => {
   return (
     <>
       <div className="row">
-        {/* <p className="tool_tip">
-        <span className="text">{orgName}</span> <span className="tool_tiptext">{orgName}</span>
-      </p> */}
-
-        <p>{orgName}</p>
+        <p className="tool_tip">
+          <span className="text">
+            {orgName.slice(0, 15)}
+            {orgName.length > 15 && "..."}
+          </span>{" "}
+          <span className="tool_tiptext">{orgName}</span>
+        </p>
         <p>{userName}</p>
-        <p>{email}</p>
+        <p className="tool_tip">
+          <span className="text">
+            {email.slice(0, 17)}
+            {email.length > 17 && ".."}
+          </span>{" "}
+          <span className="tool_tiptext">{email}</span>
+        </p>
         <p>{phoneNumber}</p>
         <p> {createdAt}</p>
         <p>

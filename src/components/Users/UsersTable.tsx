@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { IUser } from "../../globalState";
 import TableHead from "./TableHead";
 import UserRow from "./UserRow";
