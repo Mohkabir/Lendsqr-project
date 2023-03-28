@@ -1,6 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { IUser, UserContext, UserContextType } from "../../globalState";
+import { UserContext, UserContextType } from "../../globalState";
 
 import { BackIcon } from "../icons";
 import OtherUserInfo from "./OtherUserInfo";
@@ -19,7 +19,7 @@ const UserDetailsPage = () => {
 
   useEffect(() => {
     getUser(Number(location.pathname.split("/")[2]));
-  }, []);
+  }, [location.pathname]);
 
   const handlAction = (val: string, userId: string | undefined) => {
     if (userId) {

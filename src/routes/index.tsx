@@ -1,7 +1,6 @@
 import React from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import MainLayout from "../layouts";
-
 import Login from "../pages/Login";
 import OtherPages from "../pages/OtherPages";
 import UserDetails from "../pages/Userdetails";

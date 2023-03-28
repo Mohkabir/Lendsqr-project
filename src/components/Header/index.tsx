@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { IUser, UserContext, UserContextType } from "../../globalState";
 import {
@@ -18,15 +18,24 @@ type CurrentUserType = {
 const Header = () => {
   const [isMenu, setIsMenu] = useState<boolean>(false);
   const [searchResults, setSearchResults] = useState<IUser[]>([]);
-  const { users, LogOut } = useContext(UserContext) as UserContextType;
+  const { users, LogOut, getUsers } = useContext(
+    UserContext
+  ) as UserContextType;
   const [search, setSearch] = useState("");
   const [openDropDown, setOpenDropDown] = useState<boolean>(false);
 
   const [user, setUser] = useState<CurrentUserType>();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (!users.length) {
+      getUsers();
+    }
+  }, [getUsers, users]);
+
   const filterSearch = (val: string) => {
-    const res = users.filter((user) => {
+    let res: any = [];
+    users.forEach((user) => {
       if (
         user.userName.toLowerCase().includes(val) ||
         user.orgName.toLowerCase().includes(val) ||
@@ -34,7 +43,7 @@ const Header = () => {
         user.phoneNumber.toLowerCase().includes(val) ||
         user.status.toLowerCase().includes(val)
       ) {
-        return user;
+        res.push(user);
       }
     });
     setSearchResults(res);
@@ -43,20 +52,25 @@ const Header = () => {
     }
   };
 
-  const getCurrentUser = () => {
+  // const getCurrentUser = () => {
+  //   let user: string | null = localStorage.getItem("user");
+  //   if (user) {
+  //     setUser(JSON.parse(user));
+  //   } else {
+  //     navigate("/");
+  //   }
+  // };
+
+  useEffect(() => {
     let user: string | null = localStorage.getItem("user");
     if (user) {
       setUser(JSON.parse(user));
     } else {
       navigate("/");
     }
-  };
+  }, [navigate]);
 
-  useEffect(() => {
-    getCurrentUser();
-  }, []);
-
-  const handleLogout = () => {
+  const handleLogout = (): void => {
     let res = LogOut();
     if (res === "done") {
       navigate("/");

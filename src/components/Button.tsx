@@ -1,5 +1,3 @@
-import React from "react";
-import { FunctionBody } from "typescript";
 
 interface BtnProps {
   title: string;

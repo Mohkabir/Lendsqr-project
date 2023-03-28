@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { IUser, UserContext, UserContextType } from "../../globalState";
 import Cards from "./Cards";
 import Pagination from "./Pagination";
@@ -15,7 +15,7 @@ const UsersPage = () => {
     if (!users.length) {
       getUsers();
     }
-  }, []);
+  }, [getUsers, users]);
 
   useEffect(() => {
     setfilterUsers(users);
@@ -48,7 +48,6 @@ const UsersPage = () => {
     let filtered: any[] = [];
     users.forEach((user) => {
       const formated = new Date(user.createdAt).toISOString().split("T")[0];
-
       console.log(
         user.phoneNumber,
         val.phone,
