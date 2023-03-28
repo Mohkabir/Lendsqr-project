@@ -1,7 +1,7 @@
-import UserDetailsPage from "../components/UserDetails";
+import UserDetails from "../components/User/UserDetails";
 
-const UserDetails = () => {
-  return <UserDetailsPage />;
+const UserDetailsPage = () => {
+  return <UserDetails />;
 };
 
-export default UserDetails;
+export default UserDetailsPage;
