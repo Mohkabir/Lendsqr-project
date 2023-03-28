@@ -3,8 +3,8 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import MainLayout from "../layouts";
 import Login from "../pages/Login";
 import OtherPages from "../pages/OtherPages";
-import UserDetails from "../pages/Userdetails";
-import Users from "../pages/Users";
+import UserDetailsPage from "../pages/UserDetailsPage";
+import UsersPage from "../pages/UsersPage";
 
 const AllRoutes = () => {
   const location = useLocation();
@@ -45,7 +45,7 @@ const AllRoutes = () => {
           path="/users"
           element={
             <MainLayout>
-              <Users />
+              <UsersPage />
             </MainLayout>
           }
         />
@@ -55,7 +55,7 @@ const AllRoutes = () => {
           path="/users/:id"
           element={
             <MainLayout>
-              <UserDetails />
+              <UserDetailsPage />
             </MainLayout>
           }
         />

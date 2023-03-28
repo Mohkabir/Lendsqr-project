@@ -5,7 +5,7 @@ import Pagination from "./Pagination";
 import "./Users.scss";
 import UsersTable from "./UsersTable";
 
-const UsersPage = () => {
+const Users = () => {
   const { loading, users, getUsers, usersOverview } = useContext(
     UserContext
   ) as UserContextType;
@@ -97,4 +97,4 @@ const UsersPage = () => {
   );
 };
 
-export default UsersPage;
+export default Users;
